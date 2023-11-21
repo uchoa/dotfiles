@@ -7,9 +7,10 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.9);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    background-color: rgba(4, 4, 33, 0.65);
+    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
+    border-bottom: 3px solid rgba(224, 255, 0, 0.15);
+    color: rgba(234,234,234,0.65);
     transition-property: background-color;
     transition-duration: .5s;
     border-radius: 0;
@@ -48,13 +49,14 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -3px #eaeaea;
 }
 
 #workspaces button {
     padding: 0 0.4em;
     background-color: transparent;
-    color: #ffffff;
+    /*color: #eaeaea;*/
+    color: rgba(224,255,0,0.5);
 }
 
 #workspaces button:hover {
@@ -62,8 +64,12 @@ button:hover {
 }
 
 #workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+    background-color: #040421;
+    box-shadow: inset 0 -3px rgba(224,255,0,0.65);
+    color: rgba(224,255,0,0.65);
+    border: 1px solid;
+    border-radius: 2px;
+    border-color: rgba(224,255,0,0.65);
 }
 
 #workspaces button.urgent {
@@ -112,12 +118,13 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #battery.charging, #battery.plugged {
@@ -147,24 +154,28 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #backlight {
-    background-color: #90b1b1;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #network {
-    background-color: #2980b9;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #network.disconnected {
@@ -172,8 +183,8 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #pulseaudio.muted {
@@ -205,7 +216,8 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
 }
 
 #temperature.critical {
@@ -252,8 +264,8 @@ label:focus {
 }
 
 #language {
-    background: #00b093;
-    color: #740864;
+    background-color: rgba(224,255,0,0.3);
+    color: #040421;
     padding: 0 5px;
     margin: 6px 3px;
     min-width: 16px;
