@@ -1,0 +1,2 @@
+alias ls='ls --color=auto'
+alias echo='echo --color=auto'

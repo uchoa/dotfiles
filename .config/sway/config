@@ -8,6 +8,17 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 exec export SSH_AUTH_SOCK
 exec gnome-keyring-daemon --start --components=secrets
 
+## AUTOTILING
+exec_always --no-startup-id autotiling-rs
+
+## GAMMA CORRECTIOM
+exec --no-startup-id gammastep -m wayland
+exec gammastep-indicator -m wayland
+
+## SWORKSTYLE
+#  Workspace dynamic renaming
+exec sworkstyle &> ~/.local/tmp/sworkstyle.log &
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -102,6 +113,22 @@ input type:keyboard {
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+    # Notifications
+    bindsym Control+Space exec makoctl dismiss
+    bindsym Control+Shift+Space exec makoctl dismiss --all
+
+#
+# XF86 Control Keys
+# 
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    # bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym XF86Search exec $menu
+
 #
 # Moving around:
 #

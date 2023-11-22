@@ -1,0 +1,27 @@
+font=RobotoMono Nerd Font Mono 10
+background-color=#292929
+text-color=#cccccc
+margin=10
+padding=4
+border-size=1
+border-radius=0
+icons=1
+icon-location=right
+sort=+time
+
+[urgency=low]
+border-color=#cccccc
+default-timeout=5000
+
+[urgency=normal]
+border-color=#ed8712
+default-timeout=5000
+
+[urgency=high]
+border-color=#e53714
+default-timeout=0
+
+[category=mail]
+border-color=#37e514
+default-timeout=60000
+group-by=category
