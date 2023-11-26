@@ -13,7 +13,10 @@ exec_always --no-startup-id autotiling-rs
 
 ## GAMMA CORRECTIOM
 exec --no-startup-id gammastep -m wayland
-exec gammastep-indicator -m wayland
+exec gammastep-indicator &
+
+## NOTIFICATIONS
+exec --no-startup-id mako
 
 ## SWORKSTYLE
 #  Workspace dynamic renaming
