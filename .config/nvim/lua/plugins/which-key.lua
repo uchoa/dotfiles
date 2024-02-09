@@ -15,7 +15,7 @@ return {
       ["<leader>f"] = { name = "+file/find" },
       ["<leader>g"] = { name = "+git" },
       ["<leader>gh"] = { name = "+hunks" },
-      ["<leader>o"] = { name = "+org mode" },
+      ["<leader>o"] = { name = "+obsidian" },
       ["<leader>oi"] = { name = "+insert" },
       ["<leader>ol"] = { name = "+link" },
       ["<leader>q"] = { name = "+quit/session" },
