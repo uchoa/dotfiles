@@ -47,6 +47,7 @@ bindsym $mod+l exec "i3lock --nofork --show-failed-attempts --ignore-empty-passw
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
 
+# exec --no-startup-id redshift-gtk
 exec --no-startup-id redshift
 
 exec --no-startup-id ~/.config/rclone/mount.sh
