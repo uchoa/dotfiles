@@ -4,8 +4,12 @@ alias grep='grep --color=auto'
 alias vi=nvim
 alias vim=nvim
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+alias lazydot='lazygit --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
+alias cat='bat --style=numbers'
 
 export EDITOR=nvim
+export ZK_NOTEBOOK_DIR=$HOME/notebook/
+export SSH_AUTH_SOCK='$XDG_RUNTIME_DIR/ssh-agent.socket'
 
 # Starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml

@@ -12,6 +12,8 @@ config = {
 	font_size = 14,
 
 	color_scheme = 'Vs Code Dark+ (Gogh)',
+
+	default_prog = { 'tmux' },
 }
 
 return config
