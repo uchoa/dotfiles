@@ -6,6 +6,7 @@ alias vim=nvim
 alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias lazydot='lazygit --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias cat='bat --style=numbers'
+alias tgit='git -C $HOME/.local/share/task/'
 
 export EDITOR=nvim
 export ZK_NOTEBOOK_DIR=$HOME/notebook/
