@@ -77,6 +77,12 @@ recents = "--sort created- --created-after 'last two weeks'"
 # COMMAND ALIASES
 [alias]
 
+# Delete the notes you select interactively
+rm = "zk list --interactive --quiet --format '{{abs-path}}' --delimiter0 $@ | xargs -0 rm -vf --"
+
+# Edits the notes selected interactively or allows for creating a new one
+find = "zk edit --interactive"
+
 # Edit the last modified note.
 edlast = "zk edit --limit 1 --sort modified- $@"
 

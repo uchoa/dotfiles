@@ -10,7 +10,11 @@ alias tgit='git -C $HOME/.local/share/task/'
 
 export EDITOR=nvim
 export ZK_NOTEBOOK_DIR=$HOME/notebook/
-export SSH_AUTH_SOCK='$XDG_RUNTIME_DIR/ssh-agent.socket'
+# export SSH_AUTH_SOCK='$XDG_RUNTIME_DIR/ssh-agent.socket'
+
+# Make sure ssh-agent is running
+eval 'keychain 2>/dev/null'
+source $HOME/.keychain/$HOST-sh
 
 # Starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
