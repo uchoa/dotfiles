@@ -1,5 +1,5 @@
 # [Created by task 3.1.0 9/9/2024 10:33:32]
-data.location=/home/uchoa/.local/share/task
+data.location=/Users/uchoa/.local/share/task
 news.version=3.1.0
 
 # To use the default location of the XDG directories,
