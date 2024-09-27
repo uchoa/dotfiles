@@ -38,6 +38,10 @@ return {
 		local lspkind = require 'lspkind'
 
 		cmp.setup {
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
+			},
 			---@diagnostic disable-next-line: missing-fields
 			formatting = {
 				format = lspkind.cmp_format({

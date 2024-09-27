@@ -91,7 +91,13 @@ return {
 				prompt_title = 'Live Grep in Open Files',
 			}
 		end
+
+		local function telescope_search_neovim_config()
+			builtin.find_files { cwd = vim.fn.stdpath('config') }
+		end
+
 		vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = 'search in open files' })
+		vim.keymap.set('n', '<leader>sn', telescope_search_neovim_config, { desc = 'search neovim config files' })
 		vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'search select Telescope' })
 		vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'search git files' })
 		vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'search files' })

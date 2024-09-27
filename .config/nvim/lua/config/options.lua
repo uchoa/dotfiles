@@ -18,9 +18,13 @@ vim.opt.cursorline = true
 -- Set fold settings
 -- These options were recommended by nvim-ufo
 -- See: https://github.com/hevinhwang91/nvim-ufo#minimal-configuration
-vim.opt.foldcolumn = '0'
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+-- vim.opt.foldcolumn = '0'
+vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+-- vim.opt.foldnestmax = 4
 vim.opt.foldenable = true
 
 -- Tab size configuration
@@ -45,7 +49,7 @@ vim.opt.conceallevel = 2
 vim.opt.concealcursor = 'nc'
 
 -- Keep some context around the cursor
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 16
 
 -- Save undo history
 vim.opt.undofile = true
