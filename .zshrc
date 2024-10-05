@@ -7,6 +7,11 @@ alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias lazydot='lazygit --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias cat='bat --style=numbers'
 alias tgit='git -C $HOME/.local/share/task/'
+alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+alias fzf='fzf --preview "bat --color=always --style=numbers --line-range=:500 {}"'
+
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export EDITOR=nvim
 export ZK_NOTEBOOK_DIR=$HOME/notebook/
