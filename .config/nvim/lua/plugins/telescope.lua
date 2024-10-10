@@ -17,6 +17,7 @@ return {
 				return vim.fn.executable 'make' == 1
 			end,
 		},
+		'folke/todo-comments.nvim',
 	},
 
 	config = function()
@@ -96,16 +97,17 @@ return {
 			builtin.find_files { cwd = vim.fn.stdpath('config') }
 		end
 
-		vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = 'search in open files' })
-		vim.keymap.set('n', '<leader>sn', telescope_search_neovim_config, { desc = 'search neovim config files' })
-		vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'search select Telescope' })
+		vim.keymap.set('n', '<leader>f/', telescope_live_grep_open_files, { desc = 'search in open files' })
+		vim.keymap.set('n', '<leader>fn', telescope_search_neovim_config, { desc = 'find neovim config file' })
+		vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = 'search select Telescope' })
 		vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = 'search git files' })
-		vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'search files' })
-		vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'search help' })
-		vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'search current word' })
-		vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'search by grep' })
-		vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = 'search by grep on git root' })
-		vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'search diagnostics' })
-		vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'search resume' })
+		vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'find files' })
+		vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'find in help' })
+		vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'search current word' })
+		vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'search by grep' })
+		vim.keymap.set('n', '<leader>fG', '<cmd>LiveGrepGitRoot<cr>', { desc = 'search by grep on git root' })
+		vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'search diagnostics' })
+		vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'search resume' })
+		vim.keymap.set('n', '<leader>ft', '<cmd>TodoTelescope<cr>', { desc = 'find TODO' })
 	end
 }

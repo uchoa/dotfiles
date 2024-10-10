@@ -1,12 +1,14 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
+	event = { 'BufReadPre', 'BufNewFile' },
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
+		'windwp/nvim-ts-autotag',
 	},
 	build = ':TSUpdate',
 	config = vim.defer_fn(function()
 		require('nvim-treesitter.configs').setup {
-			ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'html', 'http' },
+			ensure_installed = { 'c', 'go', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'html', 'css', 'http', 'gitignore', 'dockerfile', 'yaml', 'markdown', 'markdown_inline' },
 
 			auto_install = true,
 			sync_install = false,
@@ -14,6 +16,7 @@ return {
 			modules = {},
 			highlight = { enable = true },
 			indent = { enable = true },
+			autotag = { enable = true },
 			incremental_selection = {
 				enable = true,
 				keymaps = {

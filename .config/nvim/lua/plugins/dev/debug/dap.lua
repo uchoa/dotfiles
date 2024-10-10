@@ -1,0 +1,35 @@
+return {
+	"mfussenegger/nvim-dap",
+	config = function()
+		local dap = require("dap")
+		local keymap = vim.keymap
+
+		keymap.set("n", "<F5>", function()
+			dap.continue()
+		end)
+		keymap.set("n", "<F10>", function()
+			dap.step_over()
+		end)
+		keymap.set("n", "<F11>", function()
+			dap.step_into()
+		end)
+		keymap.set("n", "<F12>", function()
+			dap.step_out()
+		end)
+		keymap.set("n", "<leader>db", function()
+			dap.toggle_breakpoint()
+		end, { desc = "toggle breakpoint" })
+		keymap.set("n", "<leader>dB", function()
+			dap.set_breakpoint()
+		end, { desc = "set breakpoint" })
+		keymap.set("n", "<leader>dm", function()
+			dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+		end, { desc = "set breakpoint with log message" })
+		keymap.set("n", "<leader>dr", function()
+			dap.repl.open()
+		end, { desc = "REPL" })
+		keymap.set("n", "<leader>dl", function()
+			dap.run_last()
+		end, { desc = "run last" })
+	end,
+}
