@@ -10,6 +10,10 @@ enable-normalization-opposite-orientation-for-nested-containers = false
 # Mouse follows focus when focused monitor changes
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+after-startup-command = [
+	"exec-and-forget /usr/local/bin/tmux new -s MASTER -d"
+]
+
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
 # - Constant:     gaps.outer.top = 8
@@ -20,10 +24,10 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 [gaps]
 inner.horizontal = 0
 inner.vertical =   0
-outer.left =       2
-outer.bottom =     2
-outer.top =        2
-outer.right =      2
+outer.left =       1
+outer.bottom =     0
+outer.top =        0
+outer.right =      1
 
 [mode.main.binding]
 # cmd-h = [] # Disable "hide application"
@@ -108,3 +112,18 @@ up =    'resize height -25'
 right = 'resize width  +25'
 enter = 'mode main'
 esc =   'mode main'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+if.window-title-regex-substring = 'New Message'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+if.window-title-regex-substring = 'Re: '
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+if.window-title-regex-substring = 'Fwd: '
+run = 'layout floating'
