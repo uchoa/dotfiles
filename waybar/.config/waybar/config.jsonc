@@ -1,0 +1,98 @@
+{
+	"layer": "top",
+	"position": "bottom",
+	"height": 30,
+	"modules-left": [
+		"hyprland/workspaces", "hyprland/submap"
+	],
+	"modules-center": [
+		"hyprland/window"
+	],
+	"modules-right": [
+		"network", "pulseaudio", "backlight", "battery", "bluetooth", "tray", "clock"
+	],
+	"sway/window": {
+		"max-length": 50
+	},
+	"backlight": {
+		// "device": "intel_backlight",
+		"format": "{percent}% {icon}",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+		// "format-icons": ["", ""]
+	},
+	"battery": {
+		"states": {
+			// "good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+		"format-icons": ["", "", "", "", ""],
+		"format": "{capacity}% {icon}",
+		"format-full": "{capacity}% {icon}",
+		"format-charging": "{capacity}% ",
+		"format-plugged": "{capacity}% ",
+		"format-alt": "{time} {icon}"
+	},
+	"network": {
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+		"format-wifi": "{essid} ({signalStrength}%) ",
+		"format-ethernet": "{ipaddr}/{cidr} ",
+		"tooltip-format": "{ifname} via {gwaddr} ",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "Disconnected ⚠",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"on-click": "ghostty --title=impala -e impala"
+	},
+	"pulseaudio": {
+		"format": "{volume}% {icon} {format_source}",
+		"format-bluetooth": "{volume}% {icon}",
+		// "format-muted": "",
+		"format-muted": " {format_source}",
+		"format-source": "{volume}% ",
+		"format-source-muted": "",
+		"format-icons": {
+			"alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+			"alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"phone-muted": "",
+			"portable": "",
+			"car": "",
+			"default": ["", ""]
+		},
+		"scroll-step": 1,
+		"on-click": "ghostty --title=pulsemixer -e pulsemixer",
+		"ignored-sinks": ["Easy Effects Sink"]
+	},
+	"bluetooth": {
+		// "format": " 󰂯 ",
+		"tooltip": true,
+		"tooltip-format": "Bluetooth Settings",
+		"format-on": "󰂯",
+		"format-off": "󰂲",
+		"format-disabled": "󰂲",
+		"format-connected": "󰂱 {num_connections}",
+		"on-click": "ghostty --title=bluetuith -e bluetuith",
+		"tooltip-format-connected": "{device_enumerate}"
+		// "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+	},
+	"tray": {
+		// "icon-size": 21,
+		"spacing": 10
+	},
+	"clock": {
+		"format-alt": "{:%a, %d. %b  %H:%M}"
+	}
+}

@@ -1,0 +1,27 @@
+###########################################
+### Ghostty Terminal Configuration File ###
+###########################################
+
+# command = /usr/bin/tmux new-session -A -s home
+theme = "Nord Wave"
+window-theme=ghostty
+window-title-font-family = "CaskaydiaCove Nerd Font"
+window-padding-x = 4
+window-padding-y = 4
+window-padding-color = background
+background = #000000
+background-opacity = 0.9
+background-opacity-cells = true
+background-blur = true
+# background-blur-radius = 40
+macos-titlebar-style = hidden
+font-family = "CaskaydiaCove Nerd Font"
+font-style = Light
+font-style-bold = SemiBold
+font-style-italic = Light Italic
+font-style-bold-italic = SemiBold Italic
+font-size = 14
+adjust-cursor-thickness = 4
+cursor-color = DarkOrange3
+cursor-style-blink = true
+confirm-close-surface = false

@@ -1,0 +1,25 @@
+[user]
+	name = André Uchôa
+	email = uchoa@pobox.com
+	signingKey = DEEC4504414B03A241F01273A5CC53451441DEAD
+
+[init]
+	defaultBranch = main
+
+[commit]
+	gpgSign = true
+
+[tag]
+	forceSignAnnotated = true
+
+[includeIf "gitdir:~/github/uchoa/"]
+	path = .gitconfig.uchoa
+
+[includeIf "gitdir:~/github/scienti/"]
+	path = .gitconfig.scienti
+
+[includeIf "gitdir:~/github/begen/"]
+	path = .gitconfig.begen
+
+[url "git@github.com:"]
+	insteadOf = https://github.com/

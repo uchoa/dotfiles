@@ -1,0 +1,91 @@
+### NOTEBOOK SETTINGS ###
+[notebook]
+dir = "$HOME/.notebook"
+
+
+# NOTE SETTINGS
+[note]
+
+# Path globs ignored while indexing existing notes.
+exclude = ["drafts/*", "log.md", "README.md"]
+
+# Language used when writing notes.
+# This is used to generate slugs or with date formats.
+language = "en"
+
+# The default title used for new note, if no `--title` flag is provided.
+default-title = "Untitled"
+
+# Template used to generate a note's filename, without extension.
+filename = "{{id}}-{{slug title}}"
+
+# The file extension used for the notes.
+extension = "md"
+
+# Template used to generate a note's content.
+# If not an absolute path, it is relative to .zk/templates/
+template = "default.md"
+
+# Configure random ID generation.
+
+# The charset used for random IDs.
+id-charset = "alphanum"
+
+# Length of the generated IDs.
+id-length = 5
+
+# Letter case for the random IDs.
+id-case = "lower"
+
+
+### EXTRA VARIABLES ###
+[extra]
+author = "André Uchôa"
+
+
+### MARKDOWN SETTINGS ###
+[format.markdown]
+# Enable support for #hashtags
+hashtags = false
+# Enable support for :colon:separated:tags:
+colon-tags = true
+
+
+### EXTERNAL TOOLS ###
+[tool]
+
+# Pager used to scroll through long output.
+pager = "less -FIRX"
+
+# Command used to preview a note during interactive fzf mode.
+fzf-preview = "bat -p --color always {-1}"
+
+[alias]
+
+list = "zk list --sort modified- $@"
+
+# Edit the notes selected interactively.
+# These aliases don't take any argument, so we don't use $@.
+# ls = "zk edit --sort created- --created-after 'last two weeks' --interactive"
+fd = "zk edit --sort modified- --interactive $@"
+find = "zk fd $@"
+
+# Delete a note selected interactively
+rm = 'zk list --interactive --quiet --format "{{abs-path}}" --delimiter0 $@ | xargs -0 rm -vf --'
+
+# Edit the notebook configuration file.
+conf = '$EDITOR "$ZK_NOTEBOOK_DIR/.zk/config.toml"'
+config = 'zk conf'
+
+# Edit global configuration
+gconf = '$EDITOR "$XDG_CONFIG_HOME/zk/config.toml"'
+
+
+### LSP (EDITOR INTEGRATION) ###
+[lsp]
+
+[lsp.diagnostics]
+# Report titles of wiki-links as hints.
+wiki-title = "hint"
+# Warn for dead links between notes.
+dead-link = "error"
