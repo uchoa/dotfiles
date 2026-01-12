@@ -14,11 +14,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias vi=nvim
 alias vim=nvim
-alias dotfiles='/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
-alias lazydot='lazygit --git-dir="$HOME/.dotfiles/" --work-tree="$HOME"'
 alias cat='bat --style=numbers'
-alias tgit='git -C $HOME/.local/share/task/'
-alias ttui='taskwarrior-tui'
 alias open='xdg-open'
 alias sc='sc-im'
 alias scim='sc-im'
