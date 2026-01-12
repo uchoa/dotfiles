@@ -9,7 +9,7 @@
 window#waybar {
   background: rgba(04, 04, 33, 0.95);
   /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-  color: white;
+  color: #eaeaea;
 }
 
 tooltip {
@@ -45,7 +45,7 @@ tooltip label {
 
 #mode {
   background: #64727d;
-  border-bottom: 3px solid white;
+  border-bottom: 3px solid #eaeaea;
 }
 
 #network.disconnected {
@@ -69,8 +69,11 @@ tooltip label {
 }
 
 #clock {
-  background-color: #64727d;
-  border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+  /* background-color: #64727d; */
+  border: 1px;
+  border-style: dotted;
+  border-color: #eaeaea;
+  /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
 }
 
 /* #battery, */
@@ -80,20 +83,27 @@ tooltip label {
 /* } */
 
 #battery.charging {
-  color: white;
-  background-color: #26a65b;
+  /* color: #26a65b; */
+  color: springgreen;
+}
+
+#battery.warning {
+  color: gold;
+}
+
+#battery.critical {
+  color: red;
 }
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: black;
+    /* background-color: #ffffff; */
+    color: #eaeaea;
   }
 }
 
-#battery.warning:not(.charging) {
-  background: #f53c3c;
-  color: white;
+#battery.critical:not(.charging) {
+  color: red;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: steps(12);

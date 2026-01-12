@@ -1,4 +1,6 @@
 #!/usr/bin/sh
 
 # Signal 12 is the numeric value of SIGUSR2
-kill -12 $(systemctl --user show --property MainPID --value waybar.service)
+# kill -12 $(systemctl --user show --property MainPID --value waybar.service)
+
+systemctl --user restart waybar.service
