@@ -32,6 +32,8 @@ eval "$(starship init zsh)"
 export GOPRIVATE=github.com/begen-ai,github.com/scienti-io,github.com/uchoa
 export PATH=$PATH:$HOME/go/bin
 
+export PATH=$PATH:$HOME/.cache/.bun/bin
+
 # Activate syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -52,3 +54,11 @@ eval "$(zoxide init zsh)"
 
 # Created by `pipx` on 2025-06-20 01:00:54
 export PATH="$PATH:/home/uchoa/.local/bin"
+
+# pnpm
+export PNPM_HOME="/home/uchoa/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
