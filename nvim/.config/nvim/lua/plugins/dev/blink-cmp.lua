@@ -3,7 +3,7 @@ return {
 	-- optional: provides snippets for the snippet source
 	dependencies = {
 		"rafamadriz/friendly-snippets",
-		-- "folke/lazydev.nvim",
+		"folke/lazydev.nvim",
 	},
 
 	-- use a release tag to download pre-built binaries
