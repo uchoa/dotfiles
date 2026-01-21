@@ -6,12 +6,13 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				go = { "goimports-reviser", "gofumpt" },
+				go = { "gofumpt" },
 				zig = { "zig fmt" },
 				javascript = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
+				jsonc = { "prettier" },
 				yaml = { "prettier" },
 				toml = { "tombi" },
 				http = { "kulala-fmt" },
