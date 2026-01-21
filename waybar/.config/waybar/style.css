@@ -20,11 +20,31 @@ tooltip label {
   color: white;
 }
 
+@keyframes blinkWorkspace {
+  to {
+    color: red;
+  }
+}
+
 #workspaces button {
   padding: 0 5px;
   background: transparent;
-  color: white;
+  color: #eaeaea;
   border-bottom: 3px solid transparent;
+}
+
+#workspaces button.active {
+  font-weight: bold;
+  color: #e0ff00;
+  border-bottom: 3px solid #e0ff00;
+}
+
+#workspaces button.urgent {
+  animation-name: blinkWorkspace;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #workspaces button.focused {
