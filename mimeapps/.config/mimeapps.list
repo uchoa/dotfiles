@@ -127,6 +127,7 @@ audio/x-adpcm=mpv.desktop
 audio/m3u=mpv.desktop
 audio/vnd.wave=mpv.desktop
 video/vnd.avi=mpv.desktop
+application/pdf=org.pwmt.zathura.desktop
 
 [Added Associations]
 x-scheme-handler/http=zen.desktop;
