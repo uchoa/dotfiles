@@ -72,8 +72,8 @@ return {
 
 			vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", ctermbg = "NONE" })
 			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE", ctermbg = "NONE" })
-			-- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#040421", ctermbg = "NONE" })
-			-- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#040421", ctermbg = "NONE" })
+			vim.api.nvim_set_hl(0, "StatusLine", { bg = "#040421", ctermbg = "NONE" })
+			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#040421", ctermbg = "NONE" })
 		end,
 	},
 }
