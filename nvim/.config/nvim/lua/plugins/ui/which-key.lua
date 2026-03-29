@@ -19,7 +19,7 @@ return {
 				{ "<leader>f", group = "file/find" },
 				{ "<leader>g", group = "git" },
 				{ "<leader>gh", group = "hunks" },
-				{ "<leader>o", group = "octo", icon = { icon = " " } },
+				{ "<leader>go", group = "octo", icon = { icon = " " } },
 				{ "<leader>q", group = "quit/session" },
 				{ "<leader>r", group = "REST", icon = { icon = "󱂛 ", color = "cyan" } },
 				{ "<leader>s", group = "search" },

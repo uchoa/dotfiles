@@ -1,3 +1,17 @@
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "text", "yaml" },
+	callback = function()
+		vim.opt_local.textwidth = 80
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			pattern = { "markdown" },
+			callback = function()
+				-- This runs the command to tidy all tables in the buffer before saving
+				vim.cmd("TableTidyAll")
+			end,
+		})
+	end,
+})
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -16,9 +30,15 @@ return {
 				yaml = { "prettier" },
 				toml = { "tombi" },
 				http = { "kulala-fmt" },
-				-- markdown = { "prettier" },
+				markdown = { "prettier_markdown" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
+			},
+			formatters = {
+				prettier_markdown = {
+					command = "prettier",
+					args = { "--prose-wrap", "always", "--print-width", "80", "--stdin-filepath", "$FILENAME" },
+				},
 			},
 			format_on_save = {
 				lsp_fallback = true,

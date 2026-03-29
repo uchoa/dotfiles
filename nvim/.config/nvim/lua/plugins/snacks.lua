@@ -62,7 +62,19 @@ return {
 		},
 		indent = { enabled = true },
 		input = { enabled = true },
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			exclude = { "node_modules", ".git", ".zk", ".jj" },
+			hidden = true,
+			ignored = true,
+			sources = {
+				-- Explicitly enable for individual pickers to prevent overrides
+				files = { hidden = true, ignored = true },
+				grep = { hidden = true, ignored = true },
+				-- smart = { hidden = true, ignored = true },
+				-- explorer = { hidden = true, ignored = true },
+			},
+		},
 		-- notifier = { enabled = true },
 		-- quickfile = { enabled = true },
 		-- scope = { enabled = true },
@@ -97,7 +109,7 @@ return {
 		{
 			"<leader>:",
 			function()
-				Snacks.picker.command_history()
+				Snacks.picker.command_history({ layout = "ivy" })
 			end,
 			desc = "Command History",
 		},
@@ -209,13 +221,6 @@ return {
 			desc = "Git Log File",
 		},
 		-- Grep
-		{
-			"<leader>sb",
-			function()
-				Snacks.picker.lines()
-			end,
-			desc = "Buffer Lines",
-		},
 		{
 			"<leader>sB",
 			function()
@@ -495,13 +500,13 @@ return {
 			desc = "Git Browse",
 			mode = { "n", "v" },
 		},
-		{
-			"<leader>gg",
-			function()
-				Snacks.lazygit()
-			end,
-			desc = "Lazygit",
-		},
+		-- {
+		-- 	"<leader>gg",
+		-- 	function()
+		-- 		Snacks.lazygit()
+		-- 	end,
+		-- 	desc = "Lazygit",
+		-- },
 		{
 			"<leader>un",
 			function()

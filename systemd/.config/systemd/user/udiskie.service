@@ -1,0 +1,9 @@
+[Unit]
+Description=Udiskie automounter for removable media
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/udiskie
+
+[Install]
+WantedBy=graphical-session.target

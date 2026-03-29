@@ -15,10 +15,19 @@
 [includeIf "gitdir:~/github/uchoa/"]
 	path = .gitconfig.uchoa
 
+[includeIf "gitdir:~/codeberg/uchoa/"]
+	path = .gitconfig.uchoa
+
 [includeIf "gitdir:~/github/scienti/"]
 	path = .gitconfig.scienti
 
+[includeIf "gitdir:~/codeberg/scienti/"]
+	path = .gitconfig.scienti
+
 [includeIf "gitdir:~/github/begen/"]
+	path = .gitconfig.begen
+
+[includeIf "gitdir:~/codeberg/begen/"]
 	path = .gitconfig.begen
 
 [url "git@github.com:"]

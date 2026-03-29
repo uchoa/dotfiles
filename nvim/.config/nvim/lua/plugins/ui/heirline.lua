@@ -17,7 +17,7 @@ return {
 				bright_bg = utils.get_highlight("Folded").bg,
 				bright_fg = utils.get_highlight("Folded").fg,
 				red = utils.get_highlight("DiagnosticError").fg,
-				dark_red = utils.get_highlight("DiffDelete").bg,
+				dark_red = utils.get_highlight("DiffDelete").bg or "#5f0000",
 				green = utils.get_highlight("String").fg,
 				blue = utils.get_highlight("Function").fg,
 				gray = utils.get_highlight("NonText").fg,

@@ -1,3 +1,5 @@
+@import "../theme/waybar/colors.css";
+
 * {
   border: none;
   border-radius: 0;
@@ -7,9 +9,9 @@
 }
 
 window#waybar {
-  background: rgba(04, 04, 33, 0.9);
+  background: @background;
   /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-  color: #eaeaea;
+  color: @text1;
 }
 
 tooltip {
@@ -29,14 +31,14 @@ tooltip label {
 #workspaces button {
   padding: 0 5px;
   background: transparent;
-  color: #eaeaea;
+  color: @text1;
   border-bottom: 3px solid transparent;
 }
 
 #workspaces button.active {
   font-weight: bold;
-  color: #e0ff00;
-  border-bottom: 3px solid #e0ff00;
+  color: @accent1;
+  border-bottom: 3px solid @accent1;
 }
 
 #workspaces button.urgent {
@@ -65,7 +67,7 @@ tooltip label {
 
 #mode {
   background: #64727d;
-  border-bottom: 3px solid #eaeaea;
+  border-bottom: 3px solid @text1;
 }
 
 #network.disconnected {
@@ -92,14 +94,14 @@ tooltip label {
   /* background-color: #64727d; */
   border: 1px;
   border-style: dotted;
-  border-color: #eaeaea;
+  border-color: @text1;
   /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
 }
 
 /* #battery, */
 /* #backlight { */
-/*   background-color: #eaeaea; */
-/*   color: #040421; */
+/*   background-color: @text1; */
+/*   color: @background; */
 /* } */
 
 #battery.charging {
@@ -118,7 +120,7 @@ tooltip label {
 @keyframes blink {
   to {
     /* background-color: #ffffff; */
-    color: #eaeaea;
+    color: @text1;
   }
 }
 

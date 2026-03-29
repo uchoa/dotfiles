@@ -9,14 +9,7 @@ return {
 	},
 	config = function()
 		--
-		-- 1. Setup core Treesitter engine
-		require("nvim-treesitter.config").setup({
-			highlight = { enable = true },
-			indent = { enable = true },
-		})
-
-		--
-		-- 2. Setup textobjects separately (Required in 2026 main branch)
+		-- 1. Setup textobjects separately (Required in 2026 main branch)
 		require("nvim-treesitter-textobjects").setup({
 			select = {
 				enable = true,
@@ -37,7 +30,7 @@ return {
 		})
 
 		--
-		-- 3. Install Parsers silently
+		-- 2. Install Parsers silently
 		local ensure_installed = {
 			"c",
 			"go",
@@ -76,15 +69,18 @@ return {
 		end
 
 		--
-		-- 4. Filetype detection
+		-- 3. Filetype detection
 		vim.filetype.add({
 			extension = { gohtml = "gotmpl" },
 		})
 
+		-- 4. Start Treesitter automatically for all filetypes
 		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "markdown",
 			callback = function()
-				vim.treesitter.start()
+				pcall(vim.treesitter.start)
+				pcall(function()
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end)
 			end,
 		})
 	end,

@@ -46,6 +46,7 @@ end
 return {
 	{
 		"gbprod/nord.nvim",
+		enabled = false,
 		lazy = false,
 		priority = 1000,
 		config = function()
@@ -55,11 +56,12 @@ return {
 					comments = { italic = true },
 				},
 			})
-			-- setColorScheme("nord")
+			setColorScheme("nord")
 		end,
 	},
 	{
 		"askfiy/visual_studio_code",
+		enabled = true,
 		priority = 100,
 		config = function()
 			local vscode = require("visual_studio_code")
@@ -67,13 +69,42 @@ return {
 			vscode.setup({
 				mode = "dark",
 				transparent = true,
+				hooks = {
+					after = function(conf, colors, utils)
+						local function set_hl_style(group, styles)
+							local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+							if next(hl) ~= nil then
+								for k, v in pairs(styles) do
+									hl[k] = v
+								end
+								vim.api.nvim_set_hl(0, group, hl)
+							else
+								vim.api.nvim_set_hl(0, group, styles)
+							end
+						end
+
+						-- Apply styles to both standard and Treesitter groups
+						set_hl_style("Comment", { italic = true })
+						set_hl_style("@comment", { italic = true })
+
+						set_hl_style("Keyword", { bold = true })
+						set_hl_style("@keyword", { bold = true })
+
+						set_hl_style("@markup.italic", { italic = true })
+						set_hl_style("@markup.strong", { bold = true })
+						set_hl_style("@markup.heading", { bold = true })
+
+						set_hl_style("@text.emphasis", { italic = true })
+						set_hl_style("@text.strong", { bold = true })
+					end,
+				},
 			})
 			setColorScheme("visual_studio_code")
 
-			vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", ctermbg = "NONE" })
-			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE", ctermbg = "NONE" })
-			vim.api.nvim_set_hl(0, "StatusLine", { bg = "#040421", ctermbg = "NONE" })
-			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#040421", ctermbg = "NONE" })
+			-- vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", ctermbg = "NONE" })
+			-- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE", ctermbg = "NONE" })
+			vim.api.nvim_set_hl(0, "StatusLine", { bg = "#222222", ctermbg = "NONE" })
+			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#222222", ctermbg = "NONE" })
 		end,
 	},
 }

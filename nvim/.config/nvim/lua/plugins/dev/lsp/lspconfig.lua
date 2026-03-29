@@ -104,5 +104,6 @@ return {
 		vim.lsp.enable("hyprls")
 		vim.lsp.enable("tinymist")
 		vim.lsp.enable("kulala_ls")
+		vim.lsp.enable("spectral")
 	end,
 }

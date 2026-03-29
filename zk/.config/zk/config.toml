@@ -1,11 +1,9 @@
-### NOTEBOOK SETTINGS ###
+## # NOTEBOOK SETTINGS ###
 [notebook]
 dir = "$HOME/.notebook"
 
-
 # NOTE SETTINGS
 [note]
-
 # Path globs ignored while indexing existing notes.
 exclude = ["drafts/*", "log.md", "README.md"]
 
@@ -37,23 +35,19 @@ id-length = 5
 # Letter case for the random IDs.
 id-case = "lower"
 
-
-### EXTRA VARIABLES ###
+## # EXTRA VARIABLES ###
 [extra]
 author = "André Uchôa"
 
-
-### MARKDOWN SETTINGS ###
+## # MARKDOWN SETTINGS ###
 [format.markdown]
 # Enable support for #hashtags
 hashtags = false
 # Enable support for :colon:separated:tags:
 colon-tags = true
 
-
-### EXTERNAL TOOLS ###
+## # EXTERNAL TOOLS ###
 [tool]
-
 # Pager used to scroll through long output.
 pager = "less -FIRX"
 
@@ -61,7 +55,6 @@ pager = "less -FIRX"
 fzf-preview = "bat -p --color always {-1}"
 
 [alias]
-
 list = "zk list --sort modified- $@"
 
 # Edit the notes selected interactively.
@@ -75,15 +68,12 @@ rm = 'zk list --interactive --quiet --format "{{abs-path}}" --delimiter0 $@ | xa
 
 # Edit the notebook configuration file.
 conf = '$EDITOR "$ZK_NOTEBOOK_DIR/.zk/config.toml"'
-config = 'zk conf'
 
 # Edit global configuration
 gconf = '$EDITOR "$XDG_CONFIG_HOME/zk/config.toml"'
 
-
-### LSP (EDITOR INTEGRATION) ###
+## # LSP (EDITOR INTEGRATION) ###
 [lsp]
-
 [lsp.diagnostics]
 # Report titles of wiki-links as hints.
 wiki-title = "hint"

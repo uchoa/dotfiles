@@ -31,6 +31,15 @@
     //   "vit": "",
     // },
   },
+  "hyprland/submap": {
+    "format": " [{}]",
+    "tooltip": false,
+  },
+  "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false,
+  },
   "hyprland/window": {},
   "backlight": {
     // "device": "intel_backlight",

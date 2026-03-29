@@ -14,7 +14,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias vi=nvim
 alias vim=nvim
-alias cat='bat --style=numbers'
+# alias cat='bat --style=numbers'
 alias open='xdg-open'
 alias sc='sc-im'
 alias scim='sc-im'
@@ -23,6 +23,8 @@ alias docker='podman'
 
 export EDITOR=nvim
 export FZF_DEFAULT_OPTS='--multi --tmux bottom,40%'
+
+export ZK_NOTEBOOK_DIR=$HOME/.notebook
 
 # Starship
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
@@ -53,10 +55,10 @@ source <(jj util completion zsh)
 eval "$(zoxide init zsh)"
 
 # Created by `pipx` on 2025-06-20 01:00:54
-export PATH="$PATH:/home/uchoa/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # pnpm
-export PNPM_HOME="/home/uchoa/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
