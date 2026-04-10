@@ -51,5 +51,19 @@ return {
 		vim.keymap.set("n", "<leader>tc", function()
 			neotest.output_panel.clear()
 		end, { desc = "Clear output panel" })
+
+		-- Go-specific keymaps
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "go",
+			callback = function(opts)
+				vim.keymap.set("n", "<leader>tm", function()
+					neotest.output_panel.clear()
+					-- Find the nearest go.mod from the current file's path
+					local go_mod_path = vim.fs.find("go.mod", { upward = true, path = vim.fn.expand("%:p:h") })[1]
+					local target_dir = go_mod_path and vim.fn.fnamemodify(go_mod_path, ":h") or vim.fn.expand("%:p:h")
+					neotest.run.run(target_dir)
+				end, { buffer = opts.buf, desc = "Run all tests in current Go module" })
+			end,
+		})
 	end,
 }
