@@ -1,0 +1,38 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "André Uchôa"
+email = "uchoa@pobox.com"
+
+[remotes.origin]
+auto-track-bookmarks = "glob:*"
+
+[signing]
+backend = "gpg"
+key = "DEEC4504414B03A241F01273A5CC53451441DEAD"
+behavior = "own"
+
+# Define conditional overrides based on the project path
+[[--scope]]
+--when.repositories = [
+  "/home/uchoa/github/scienti",
+  "/home/uchoa/projects/scienti"
+]
+
+[--scope.user]
+email = "uchoa@scienti.com.br"
+
+[--scope.signing]
+key = "F1835FC7FFEBD0A858BC5F8FFAEA366211B5A7C2"
+
+[[--scope]]
+--when.repositories = ["/home/uchoa/github/begen", "/home/uchoa/projects/begen"]
+
+[--scope.user]
+email = "uchoa@begen.ai"
+
+[--scope.signing]
+key = "41D2510855ECA55A266BA35DDB93C0ECE6FE64A4"
+
+[ui]
+default-command = "log"

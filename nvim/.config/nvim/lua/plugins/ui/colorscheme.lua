@@ -70,17 +70,11 @@ return {
 				mode = "dark",
 				transparent = true,
 				hooks = {
-					after = function(conf, colors, utils)
+					after = function(_conf, _colors, _utils)
 						local function set_hl_style(group, styles)
 							local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-							if next(hl) ~= nil then
-								for k, v in pairs(styles) do
-									hl[k] = v
-								end
-								vim.api.nvim_set_hl(0, group, hl)
-							else
-								vim.api.nvim_set_hl(0, group, styles)
-							end
+							local merged = vim.tbl_extend("force", hl, styles) --[[@as vim.api.keyset.highlight]]
+							vim.api.nvim_set_hl(0, group, merged)
 						end
 
 						-- Apply styles to both standard and Treesitter groups

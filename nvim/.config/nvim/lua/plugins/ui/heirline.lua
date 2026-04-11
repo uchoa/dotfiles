@@ -229,40 +229,40 @@ return {
 			end,
 			hl = { fg = utils.get_highlight("Type").fg, bold = true },
 		}
-		local FileEncoding = {
-			provider = function()
-				local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc -- :h 'enc'
-				return enc ~= "utf-8" and enc:upper()
-			end,
-		}
-		local FileFormat = {
-			provider = function()
-				local fmt = vim.bo.fileformat
-				return fmt ~= "unix" and fmt:upper()
-			end,
-		}
-
-		local FileSize = {
-			provider = function()
-				-- stackoverflow, compute human readable file size
-				local suffix = { "b", "k", "M", "G", "T", "P", "E" }
-				local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
-				fsize = (fsize < 0 and 0) or fsize
-				if fsize < 1024 then
-					return fsize .. suffix[1]
-				end
-				local i = math.floor((math.log(fsize) / math.log(1024)))
-				return string.format("%.2g%s", fsize / math.pow(1024, i), suffix[i + 1])
-			end,
-		}
-
-		local FileLastModified = {
-			-- did you know? Vim is full of functions!
-			provider = function()
-				local ftime = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
-				return (ftime > 0) and os.date("%c", ftime)
-			end,
-		}
+		-- local FileEncoding = {
+		-- 	provider = function()
+		-- 		local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc -- :h 'enc'
+		-- 		return enc ~= "utf-8" and enc:upper()
+		-- 	end,
+		-- }
+		-- local FileFormat = {
+		-- 	provider = function()
+		-- 		local fmt = vim.bo.fileformat
+		-- 		return fmt ~= "unix" and fmt:upper()
+		-- 	end,
+		-- }
+		--
+		-- local FileSize = {
+		-- 	provider = function()
+		-- 		-- stackoverflow, compute human readable file size
+		-- 		local suffix = { "b", "k", "M", "G", "T", "P", "E" }
+		-- 		local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(0))
+		-- 		fsize = (fsize < 0 and 0) or fsize
+		-- 		if fsize < 1024 then
+		-- 			return fsize .. suffix[1]
+		-- 		end
+		-- 		local i = math.floor((math.log(fsize) / math.log(1024)))
+		-- 		return string.format("%.2g%s", fsize / math.pow(1024, i), suffix[i + 1])
+		-- 	end,
+		-- }
+		--
+		-- local FileLastModified = {
+		-- 	-- did you know? Vim is full of functions!
+		-- 	provider = function()
+		-- 		local ftime = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
+		-- 		return (ftime > 0) and os.date("%c", ftime)
+		-- 	end,
+		-- }
 
 		-- We're getting minimalist here!
 		local Ruler = {
@@ -299,7 +299,7 @@ return {
 			-- Or complicate things a bit and get the servers names
 			provider = function()
 				local names = {}
-				for i, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+				for _, server in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
 					table.insert(names, server.name)
 				end
 				return " [" .. table.concat(names, " ") .. "]"
@@ -447,36 +447,36 @@ return {
 			-- see Click-it! section for clickable actions
 		}
 
-		local WorkDir = {
-			init = function(self)
-				self.icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. " " .. " "
-				local cwd = vim.fn.getcwd(0)
-				self.cwd = vim.fn.fnamemodify(cwd, ":~")
-			end,
-			hl = { fg = "blue", bold = true },
-
-			flexible = 1,
-
-			{
-				-- evaluates to the full-lenth path
-				provider = function(self)
-					local trail = self.cwd:sub(-1) == "/" and "" or "/"
-					return self.icon .. self.cwd .. trail .. " "
-				end,
-			},
-			{
-				-- evaluates to the shortened path
-				provider = function(self)
-					local cwd = vim.fn.pathshorten(self.cwd)
-					local trail = self.cwd:sub(-1) == "/" and "" or "/"
-					return self.icon .. cwd .. trail .. " "
-				end,
-			},
-			{
-				-- evaluates to "", hiding the component
-				provider = "",
-			},
-		}
+		-- local WorkDir = {
+		-- 	init = function(self)
+		-- 		self.icon = (vim.fn.haslocaldir(0) == 1 and "l" or "g") .. " " .. " "
+		-- 		local cwd = vim.fn.getcwd(0)
+		-- 		self.cwd = vim.fn.fnamemodify(cwd, ":~")
+		-- 	end,
+		-- 	hl = { fg = "blue", bold = true },
+		--
+		-- 	flexible = 1,
+		--
+		-- 	{
+		-- 		-- evaluates to the full-lenth path
+		-- 		provider = function(self)
+		-- 			local trail = self.cwd:sub(-1) == "/" and "" or "/"
+		-- 			return self.icon .. self.cwd .. trail .. " "
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		-- evaluates to the shortened path
+		-- 		provider = function(self)
+		-- 			local cwd = vim.fn.pathshorten(self.cwd)
+		-- 			local trail = self.cwd:sub(-1) == "/" and "" or "/"
+		-- 			return self.icon .. cwd .. trail .. " "
+		-- 		end,
+		-- 	},
+		-- 	{
+		-- 		-- evaluates to "", hiding the component
+		-- 		provider = "",
+		-- 	},
+		-- }
 
 		local HelpFileName = {
 			condition = function()

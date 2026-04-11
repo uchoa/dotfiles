@@ -8,6 +8,11 @@ SAVEHIST=1000
 setopt append_history
 setopt extended_history
 setopt inc_append_history
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_EXPIRE_DUPS_FIRST
 
 # Aliases
 alias ls='ls --color=auto'
@@ -31,10 +36,44 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
 
 # Go programming language configuration
-export GOPRIVATE=github.com/begen-ai,github.com/scienti-io,github.com/uchoa
+export GOPRIVATE=github.com/begen-ai,github.com/scienti-io,github.com/uchoa,gitlab.com/scienti,gitlab.com/auchoa
 export PATH=$PATH:$HOME/go/bin
 
 export PATH=$PATH:$HOME/.cache/.bun/bin
+
+# sesh
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    # session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ' --preview 'sesh preview {}')
+    # session=$(sesh list -t -c | tv --preview-command "script -q -c 'sesh preview {}' /dev/null")
+    # session=$(sesh list -t -c | tv --preview-command "unbuffer sesh preview {}")
+
+		session=$(sesh list --icons | fzf --height 80% \
+			--no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+			--header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+			--bind 'tab:down,btab:up' \
+			--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+			--bind 'ctrl-t:change-prompt(  )+reload(sesh list -t --icons)' \
+			--bind 'ctrl-g:change-prompt(󰢻  )+reload(sesh list -c --icons)' \
+			--bind 'ctrl-x:change-prompt(  )+reload(sesh list -z --icons)' \
+			--bind 'ctrl-f:change-prompt(  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+			--bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+			--preview 'sesh preview {}'
+		)
+
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+zle     -N             sesh-sessions
+bindkey -M emacs '\es' sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
 
 # Activate syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
