@@ -16,7 +16,8 @@ behavior = "own"
 [[--scope]]
 --when.repositories = [
   "/home/uchoa/github/scienti",
-  "/home/uchoa/projects/scienti"
+  "/home/uchoa/projects/scienti",
+  "/home/uchoa/projects/ScientiOS"
 ]
 
 [--scope.user]

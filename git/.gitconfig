@@ -24,6 +24,9 @@
 [includeIf "gitdir:~/projects/scienti/"]
 	path = .gitconfig.scienti
 
+[includeIf "gitdir:~/projects/ScientiOS/"]
+	path = .gitconfig.scienti
+
 [includeIf "gitdir:~/github/begen/"]
 	path = .gitconfig.begen
 
