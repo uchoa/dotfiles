@@ -1,7 +1,3 @@
-if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
-    export GTK_IM_MODULE="simple"
-fi
-
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
@@ -25,21 +21,9 @@ alias sc='sc-im'
 alias scim='sc-im'
 alias md='glow --tui'
 alias docker='podman'
+alias less='less -rF'
 
-export EDITOR=nvim
-export FZF_DEFAULT_OPTS='--multi --tmux bottom,40%'
-
-export ZK_NOTEBOOK_DIR=$HOME/.notebook
-
-# Starship
-export STARSHIP_CONFIG=~/.config/starship/starship.toml
 eval "$(starship init zsh)"
-
-# Go programming language configuration
-export GOPRIVATE=github.com/begen-ai,github.com/scienti-io,github.com/uchoa,gitlab.com/scienti,gitlab.com/auchoa
-export PATH=$PATH:$HOME/go/bin
-
-export PATH=$PATH:$HOME/.cache/.bun/bin
 
 # sesh
 function sesh-sessions() {
@@ -51,8 +35,8 @@ function sesh-sessions() {
     # session=$(sesh list -t -c | tv --preview-command "script -q -c 'sesh preview {}' /dev/null")
     # session=$(sesh list -t -c | tv --preview-command "unbuffer sesh preview {}")
 
-		session=$(sesh list --icons | fzf --height 80% \
-			--no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
+		session=$(sesh list --icons | fzf --height 40% \
+			--no-sort --ansi --border-label ' sesh ' --border --prompt '⚡  ' \
 			--header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
 			--bind 'tab:down,btab:up' \
 			--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
@@ -61,6 +45,7 @@ function sesh-sessions() {
 			--bind 'ctrl-x:change-prompt(  )+reload(sesh list -z --icons)' \
 			--bind 'ctrl-f:change-prompt(  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
 			--bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+			--preview-window 'right:55%' \
 			--preview 'sesh preview {}'
 		)
 
@@ -86,20 +71,21 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 # Activate autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# Activate fuzzy history search
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
+
 autoload -Uz compinit
 compinit
+
+zstyle ':completion:*' menu select
+zmodload zsh/complist
 
 source <(jj util completion zsh)
 
 eval "$(zoxide init zsh)"
 
-# Created by `pipx` on 2025-06-20 01:00:54
-export PATH="$PATH:$HOME/.local/bin"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
