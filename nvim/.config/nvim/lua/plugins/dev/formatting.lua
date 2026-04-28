@@ -12,6 +12,18 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "go",
+	callback = function()
+		vim.opt_local.textwidth = 80
+		-- c: auto-wrap comments using textwidth
+		-- q: allow formatting comments with gq
+		-- r: auto-insert comment leader after hitting <Enter>
+		-- o: auto-insert comment leader after hitting 'o' or 'O'
+		vim.opt_local.formatoptions:append("cqro")
+	end,
+})
+
 return {
 	"stevearc/conform.nvim",
 	event = { "BufReadPre", "BufNewFile" },
@@ -20,7 +32,7 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				go = { "gofumpt" },
+				go = { "gofumpt", "golines" },
 				zig = { "zig fmt" },
 				javascript = { "prettier" },
 				css = { "prettier" },
@@ -38,6 +50,9 @@ return {
 				prettier_markdown = {
 					command = "prettier",
 					args = { "--prose-wrap", "always", "--print-width", "80", "--stdin-filepath", "$FILENAME" },
+				},
+				golines = {
+					prepend_args = { "-m", "80", "--shorten-comments" },
 				},
 			},
 			format_on_save = {
