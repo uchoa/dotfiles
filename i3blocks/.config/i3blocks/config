@@ -1,0 +1,5 @@
+[keyboard-layout]
+command=setxkbmap -query | grep variant | grep -q intl && echo "US-INTL" || echo "US"
+interval=once
+signal=10
+
