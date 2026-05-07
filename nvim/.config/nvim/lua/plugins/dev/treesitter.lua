@@ -40,6 +40,7 @@ return {
 			"tsx",
 			"javascript",
 			"typescript",
+			"svelte",
 			"json",
 			"vimdoc",
 			"vim",

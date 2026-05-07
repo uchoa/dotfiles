@@ -89,3 +89,10 @@ eval "$(zoxide init zsh)"
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/home/uchoa/.bun/_bun" ] && source "/home/uchoa/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

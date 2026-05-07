@@ -35,3 +35,5 @@
 
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[alias]
+	tree = log --graph --oneline --decorate --all

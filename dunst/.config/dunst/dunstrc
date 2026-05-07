@@ -1,0 +1,57 @@
+[global]
+    # Match i3 Font
+    font = RobotoMono Nerd Font Propo 12
+
+    # Position in the top right, up to 300px wide
+    # Match i3 window borders (1px)
+    frame_width = 1
+    
+    # Position in the top right, up to 300px wide
+    width = 300
+    origin = top-right
+    
+    # Distance from the edge of the screen (external padding)
+    offset = 12x12
+    
+    # Space between multiple notifications (external padding)
+    gap_size = 8
+
+    # Match i3 sharp corners
+    corner_radius = 0
+    
+    # Internal padding
+    padding = 8
+    horizontal_padding = 8
+
+    # Make the separator line match the border color
+    separator_color = frame
+
+    # Icon/Image settings
+    icon_position = left
+    min_icon_size = 48
+    max_icon_size = 64
+    enable_recursive_icon_lookup = true
+    icon_theme = Adwaita
+    text_icon_padding = 12
+
+[urgency_low]
+    # Matches i3 client.unfocused
+    background = "#040421"
+    foreground = "#888888"
+    # Dimmed version of the normal #e0ff00 yellow
+    frame_color = "#708000"
+    timeout = 2
+
+[urgency_normal]
+    # Matches i3 client.unfocused background, but with client.focused border
+    background = "#040421"
+    foreground = "#ffffff"
+    frame_color = "#e0ff00"
+    timeout = 8
+
+[urgency_critical]
+    # Matches i3 client.urgent
+    background = "#900000"
+    foreground = "#ffffff"
+    frame_color = "#2f343a"
+    timeout = 0

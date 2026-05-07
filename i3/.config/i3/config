@@ -19,6 +19,16 @@ font pango:RobotoMono Nerd Font Propo 8
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
+exec --no-startup-id dbus-update-activation-environment --all
+
+# --- Dunst Notification Management ---
+# Pop up the last missed notification
+bindsym $mod+n exec --no-startup-id dunstctl history-pop
+# Close the current notification
+bindsym $mod+Shift+n exec --no-startup-id dunstctl close
+# Close all notifications
+bindsym $mod+Ctrl+n exec --no-startup-id dunstctl close-all
+
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3

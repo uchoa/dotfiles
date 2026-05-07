@@ -15,6 +15,11 @@ name = "home"
 path = "~"
 
 [[session]]
+name = "void update"
+path = "~"
+startup_command = "sudo xbps-install -Syu"
+
+[[session]]
 name = "config|tmux"
 path = "~/.config/tmux"
 startup_command = "nvim tmux.conf"
