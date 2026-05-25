@@ -69,7 +69,7 @@ bindsym $mod+l exec lock
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-themed"
+bindsym --release $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu-themed"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -202,7 +202,7 @@ default_border pixel 1
 default_floating_border pixel 1
 for_window [class="ghostty"] border pixel 1
 exec_always --no-startup-id xsetroot -cursor_name left_ptr
-exec_always --no-startup-id picom -b
+exec_always --no-startup-id picom -b --backend glx
 exec_always --no-startup-id feh --bg-fill ~/.local/share/wallpaper/world-map.jpg
 
 gaps inner 2

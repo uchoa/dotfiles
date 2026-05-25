@@ -11,6 +11,7 @@
 
 [tag]
 	forceSignAnnotated = true
+	gpgSign = true
 
 [includeIf "gitdir:~/github/uchoa/"]
 	path = .gitconfig.uchoa

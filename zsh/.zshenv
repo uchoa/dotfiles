@@ -8,8 +8,10 @@ export GPG_TTY=$(tty)
 gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 
 export XCURSOR_THEME="phinger-cursors-dark"
-export XCURSOR_SIZE=48
 export BAT_PAGER="less -rF"
+
+alias shutdown='sudo shutdown -h now'
+alias reboot='sudo reboot'
 
 if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export GTK_IM_MODULE="simple"
