@@ -31,5 +31,37 @@ return {
 		keymap.set("n", "<leader>dl", function()
 			dap.run_last()
 		end, { desc = "run last" })
+
+		-- LLDB Adapter for Zig/Rust
+		dap.adapters.lldb = {
+			type = "executable",
+			command = "lldb-dap",
+			name = "lldb",
+		}
+
+		-- Rust Configuration
+		dap.configurations.rust = {
+			{
+				name = "Launch Rust Executable",
+				type = "lldb",
+				request = "launch",
+				program = function()
+					print("Building Rust project...")
+					vim.fn.system("cargo build")
+					
+					local cwd = vim.fn.getcwd()
+					local project_name = vim.fn.fnamemodify(cwd, ":t")
+					local default_path = cwd .. "/target/debug/" .. project_name
+					
+					return vim.fn.input("Path to executable: ", default_path, "file")
+				end,
+				cwd = "${workspaceFolder}",
+				stopOnEntry = false,
+				args = function()
+					local input = vim.fn.input("Arguments: ")
+					return vim.split(input, " ", { trimempty = true })
+				end,
+			},
+		}
 	end,
 }

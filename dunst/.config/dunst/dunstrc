@@ -34,6 +34,13 @@
     icon_theme = Adwaita
     text_icon_padding = 12
 
+    # Progress bar for OSD
+    progress_bar = true
+    progress_bar_height = 8
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+
 [urgency_low]
     # Matches i3 client.unfocused
     background = "#040421"
@@ -55,3 +62,8 @@
     foreground = "#ffffff"
     frame_color = "#2f343a"
     timeout = 0
+[sys-osd]
+    appname = "sys-osd"
+    history_ignore = yes
+    # Show only title (e.g. Volume) and progress bar, removing the %b body text if empty
+    format = "<b>%s</b>\n%b"

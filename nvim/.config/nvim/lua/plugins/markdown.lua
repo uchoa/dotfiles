@@ -46,37 +46,13 @@ return {
 		},
 	},
 	{
-		"toppair/peek.nvim",
-		event = { "BufReadPost *.md", "BufNewFile *.md" },
-		build = "deno task build:fast",
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = "cd app && bun install",
 		config = function()
-			local peek = require("peek")
-			peek.setup({
-				app = "webview",
-			})
-			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
-			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
-			vim.api.nvim_create_user_command("PeekToggle", function()
-				if peek.is_open() then
-					peek.close()
-				else
-					peek.open()
-				end
-			end, {})
-			local group = vim.api.nvim_create_augroup("markdown_autocommands", { clear = true })
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "markdown" }, -- here you can add additional filetypes
-				callback = function(ev)
-					-- actual mapping
-					vim.keymap.set(
-						"n",
-						"<C-p>",
-						"<cmd>PeekToggle<CR>",
-						{ buffer = ev.buf, silent = true, desc = "Toggle Peek Preview" }
-					)
-				end,
-				group = group,
-			})
+			vim.g.mkdp_browser = "/bin/surf"
+			vim.keymap.set("n", "<C-p>", "<cmd>MarkdownPreviewToggle<CR>")
 		end,
 	},
 	{

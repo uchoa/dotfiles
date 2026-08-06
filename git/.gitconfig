@@ -28,6 +28,9 @@
 [includeIf "gitdir:~/projects/ScientiOS/"]
 	path = .gitconfig.scienti
 
+[includeIf "gitdir:~/projects/sciOS/"]
+	path = .gitconfig.scienti
+
 [includeIf "gitdir:~/github/begen/"]
 	path = .gitconfig.begen
 
@@ -38,3 +41,9 @@
 	insteadOf = https://github.com/
 [alias]
 	tree = log --graph --oneline --decorate --all
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

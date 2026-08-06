@@ -26,15 +26,11 @@
 -- 	return loaded
 -- end
 --
--- return {
--- 	"aktersnurra/no-clown-fiesta.nvim",
--- 	priority = 1000,
--- 	config = config,
--- 	lazy = false,
--- }
 
-local setColorScheme = function(cs)
-	vim.cmd.colorscheme(cs)
+local setColorScheme = function()
+	vim.cmd.colorscheme("no-clown-fiesta")
+	-- vim.cmd.colorscheme("nord")
+	-- vim.cmd.colorscheme("visual_studio_code")
 
 	-- transparent background
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -45,8 +41,25 @@ end
 
 return {
 	{
+		"aktersnurra/no-clown-fiesta.nvim",
+		enabled = true,
+		priority = 1000,
+		config = function()
+			setColorScheme()
+			vim.api.nvim_create_autocmd("ColorScheme", {
+				pattern = "*",
+				callback = function()
+					vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#444444" })
+				end,
+			})
+			-- apply it immediately once just in case
+			vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#444444" })
+		end,
+		lazy = false,
+	},
+	{
 		"gbprod/nord.nvim",
-		enabled = false,
+		enabled = true,
 		lazy = false,
 		priority = 1000,
 		config = function()
@@ -56,7 +69,7 @@ return {
 					comments = { italic = true },
 				},
 			})
-			setColorScheme("nord")
+			setColorScheme()
 		end,
 	},
 	{
@@ -93,10 +106,9 @@ return {
 					end,
 				},
 			})
-			setColorScheme("visual_studio_code")
 
-			-- vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE", ctermbg = "NONE" })
-			-- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "NONE", ctermbg = "NONE" })
+			setColorScheme()
+
 			vim.api.nvim_set_hl(0, "StatusLine", { bg = "#222222", ctermbg = "NONE" })
 			vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#222222", ctermbg = "NONE" })
 		end,

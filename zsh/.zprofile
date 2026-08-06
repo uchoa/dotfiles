@@ -9,3 +9,7 @@ if [ -e "$XDG_RUNTIME_DIR/bus" ]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 fi
 
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/uchoa/.local/bin:$PATH"

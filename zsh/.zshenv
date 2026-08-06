@@ -12,6 +12,7 @@ export BAT_PAGER="less -rF"
 
 alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
+alias her='herdr'
 
 if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export GTK_IM_MODULE="simple"
@@ -22,6 +23,12 @@ export TERMINAL=$(which ghostty)
 export FZF_DEFAULT_OPTS='--multi --tmux bottom,40%'
 export ZK_NOTEBOOK_DIR=$HOME/.notebook
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+export OLLAMA_VULKAN=1
+export OLLAMA_IGPU_ENABLE=1
+export GGML_VK_VISIBLE_DEVICES=0
+
+export XBPS_DISTDIR=$HOME/projects/void-linux/void-packages/
 
 export GOPRIVATE=github.com/begen-ai,github.com/scienti-io,github.com/uchoa,gitlab.com/scienti,gitlab.com/auchoa
 
@@ -42,3 +49,10 @@ export PATH
 if [ -f '/home/uchoa/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/path.zsh.inc'; fi
 
 
+
+# AI Power Management Profiles
+alias ai-mode='echo performance | sudo tee /sys/firmware/acpi/platform_profile && echo "🚀 AI Performance Mode: ENGAGED"'
+alias battery-mode='echo low-power | sudo tee /sys/firmware/acpi/platform_profile && echo "🔋 Battery Saver Mode: ENGAGED"'
+alias normal-mode='echo balanced | sudo tee /sys/firmware/acpi/platform_profile && echo "⚖️  Balanced Mode: ENGAGED"'
+. "$HOME/.cargo/env"
+export LANGUAGE="en_US.UTF-8"

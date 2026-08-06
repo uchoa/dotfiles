@@ -1,8 +1,8 @@
 [Default Applications]
-x-scheme-handler/http=userapp-Firefox-L3DXN3.desktop
-x-scheme-handler/https=userapp-Firefox-L3DXN3.desktop
+x-scheme-handler/http=zen-browser.desktop
+x-scheme-handler/https=zen-browser.desktop
 x-scheme-handler/chrome=userapp-Firefox-L3DXN3.desktop
-text/html=userapp-Firefox-L3DXN3.desktop
+text/html=zen-browser.desktop
 application/x-extension-htm=userapp-Firefox-L3DXN3.desktop
 application/x-extension-html=userapp-Firefox-L3DXN3.desktop
 application/x-extension-shtml=userapp-Firefox-L3DXN3.desktop
@@ -130,15 +130,6 @@ video/vnd.avi=mpv.desktop
 application/pdf=org.pwmt.zathura.desktop
 inode/directory=yazi.desktop
 x-scheme-handler/slack=slack.desktop
+x-scheme-handler/about=zen-browser.desktop
+x-scheme-handler/unknown=zen-browser.desktop
 
-[Added Associations]
-x-scheme-handler/http=userapp-Firefox-L3DXN3.desktop;
-x-scheme-handler/https=userapp-Firefox-L3DXN3.desktop;
-x-scheme-handler/chrome=userapp-Firefox-L3DXN3.desktop;
-text/html=userapp-Firefox-L3DXN3.desktop;
-application/x-extension-htm=userapp-Firefox-L3DXN3.desktop;
-application/x-extension-html=userapp-Firefox-L3DXN3.desktop;
-application/x-extension-shtml=userapp-Firefox-L3DXN3.desktop;
-application/xhtml+xml=userapp-Firefox-L3DXN3.desktop;
-application/x-extension-xhtml=userapp-Firefox-L3DXN3.desktop;
-application/x-extension-xht=userapp-Firefox-L3DXN3.desktop;

@@ -55,6 +55,7 @@ return {
 			"markdown",
 			"markdown_inline",
 			"hyprlang",
+			"rust",
 		}
 
 		-- Filter to only install what is missing to avoid 'Press Enter' prompts

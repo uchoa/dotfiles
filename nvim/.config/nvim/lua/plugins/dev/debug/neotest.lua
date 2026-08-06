@@ -7,6 +7,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		{ "fredrikaverpil/neotest-golang", version = "*" },
 		"lawrence-laz/neotest-zig",
+		"rouge8/neotest-rust",
 	},
 	config = function()
 		local neotest = require("neotest")
@@ -18,6 +19,10 @@ return {
 					dap = {
 						adapter = "lldb",
 					},
+				}),
+				require("neotest-rust")({
+					args = { "--no-capture" },
+					dap_adapter = "lldb",
 				}),
 			},
 		})
@@ -52,17 +57,17 @@ return {
 			neotest.output_panel.clear()
 		end, { desc = "Clear output panel" })
 
-		-- Go-specific keymaps
+		-- Go and Rust module/crate test mapping
 		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "go",
+			pattern = { "go", "rust" },
 			callback = function(opts)
 				vim.keymap.set("n", "<leader>tm", function()
 					neotest.output_panel.clear()
-					-- Find the nearest go.mod from the current file's path
-					local go_mod_path = vim.fs.find("go.mod", { upward = true, path = vim.fn.expand("%:p:h") })[1]
-					local target_dir = go_mod_path and vim.fn.fnamemodify(go_mod_path, ":h") or vim.fn.expand("%:p:h")
+					local marker = vim.bo[opts.buf].filetype == "go" and "go.mod" or "Cargo.toml"
+					local root_path = vim.fs.find(marker, { upward = true, path = vim.fn.expand("%:p:h") })[1]
+					local target_dir = root_path and vim.fn.fnamemodify(root_path, ":h") or vim.fn.expand("%:p:h")
 					neotest.run.run(target_dir)
-				end, { buffer = opts.buf, desc = "Run all tests in current Go module" })
+				end, { buffer = opts.buf, desc = "Run all tests in current module/crate" })
 			end,
 		})
 	end,

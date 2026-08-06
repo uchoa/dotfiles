@@ -25,6 +25,24 @@ alias less='less -rF'
 
 eval "$(starship init zsh)"
 
+# herdr
+hsch() {
+    local session
+
+		session=$(herdr session list | awk 'NR>1 {print $1}' | fzf --border --header="Switch Herdr Session")
+
+		zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    
+    herdr session attach "$session"
+
+}
+
+zle -N hsch_widget hsch
+
+# 3. Bind the widget to a key shortcut (e.g., Ctrl + G)
+bindkey '\eh' hsch_widget
+
 # sesh
 function sesh-sessions() {
   {
@@ -86,6 +104,7 @@ zmodload zsh/complist
 source <(jj util completion zsh)
 
 eval "$(zoxide init zsh)"
+eval "$(herdr completion zsh)"
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
@@ -96,3 +115,9 @@ if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then .
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/uchoa/.local/bin:$PATH"
+
+eval "$(omp completions zsh)"

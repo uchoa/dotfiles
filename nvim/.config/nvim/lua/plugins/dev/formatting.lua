@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "go",
+	pattern = { "go", "rust" },
 	callback = function()
 		vim.opt_local.textwidth = 80
 		-- c: auto-wrap comments using textwidth
@@ -45,6 +45,7 @@ return {
 				markdown = { "prettier_markdown" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
+				rust = { "rustfmt" },
 			},
 			formatters = {
 				prettier_markdown = {

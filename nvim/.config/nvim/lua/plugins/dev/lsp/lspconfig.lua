@@ -37,6 +37,17 @@ local function on_attach_wrapper(original_on_attach)
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, "workspace list folders")
 
+		-- Inlay Hints
+		if vim.lsp.inlay_hint then
+			nmap("<leader>ch", function()
+				local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+				vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
+			end, "toggle inlay hints")
+			
+			-- Enable by default
+			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) 
+		end
+
 		-- Create a command `:Format` local to the LSP buffer
 		vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
 			vim.lsp.buf.format()
@@ -105,5 +116,6 @@ return {
 		vim.lsp.enable("tinymist")
 		vim.lsp.enable("kulala_ls")
 		vim.lsp.enable("spectral")
+		vim.lsp.enable("rust_analyzer")
 	end,
 }
