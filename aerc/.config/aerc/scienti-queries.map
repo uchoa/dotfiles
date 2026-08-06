@@ -1,0 +1,4 @@
+INBOX=tag:inbox and path:scienti/**
+Sent=tag:sent and path:scienti/**
+Drafts=tag:draft and path:scienti/**
+Archive=NOT tag:inbox and path:scienti/**

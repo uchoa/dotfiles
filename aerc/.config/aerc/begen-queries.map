@@ -1,0 +1,4 @@
+INBOX=tag:inbox and path:begen/**
+Sent=tag:sent and path:begen/**
+Drafts=tag:draft and path:begen/**
+Archive=NOT tag:inbox and path:begen/**
