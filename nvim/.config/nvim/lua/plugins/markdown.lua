@@ -64,7 +64,7 @@ return {
 		},
 		opts = function()
 			local cwd = vim.fn.getcwd()
-			local templates_folder = vim.fn.expand("~/.templates")
+			local templates_folder = vim.fn.expand("~/.notebook/.templates")
 			if vim.fn.isdirectory(cwd .. "/docs/.templates") == 1 then
 				templates_folder = cwd .. "/docs/.templates"
 			else
@@ -75,6 +75,10 @@ return {
 
 			return {
 				workspaces = {
+					{
+						name = "brain",
+						path = vim.fn.expand("~/.notebook"),
+					},
 					{
 						name = "project",
 						path = function()

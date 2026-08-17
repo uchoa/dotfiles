@@ -14,6 +14,8 @@ alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
 alias her='herdr'
 
+alias sendmail='env MSMTP=$HOME/.local/bin/msmtp-wrapper.py msmtpq --read-envelope-from --read-recipients'
+
 if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
     export GTK_IM_MODULE="simple"
 fi

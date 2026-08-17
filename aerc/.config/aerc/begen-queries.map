@@ -1,4 +1,4 @@
-INBOX=tag:inbox and path:begen/**
-Sent=tag:sent and path:begen/**
-Drafts=tag:draft and path:begen/**
-Archive=NOT tag:inbox and path:begen/**
+INBOX=tag:inbox and not tag:trash and path:begen/**
+Sent=tag:sent and not tag:trash and path:begen/**
+Drafts=tag:draft and not tag:trash and path:begen/**
+Archive=NOT tag:inbox and not tag:trash and path:begen/**
