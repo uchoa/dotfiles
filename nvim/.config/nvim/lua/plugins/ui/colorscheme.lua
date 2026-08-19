@@ -45,7 +45,16 @@ return {
 		enabled = true,
 		priority = 1000,
 		config = function()
-			setColorScheme()
+			local opts = {
+				theme = "dark",
+				transparent = true,
+				styles = {
+					comments = { italic = true },
+					type = { bold = true },
+				},
+			}
+			local plugin = require("no-clown-fiesta")
+			plugin.load(opts)
 			vim.api.nvim_create_autocmd("ColorScheme", {
 				pattern = "*",
 				callback = function()
@@ -54,6 +63,7 @@ return {
 			})
 			-- apply it immediately once just in case
 			vim.api.nvim_set_hl(0, "SnacksIndent", { fg = "#444444" })
+			setColorScheme()
 		end,
 		lazy = false,
 	},

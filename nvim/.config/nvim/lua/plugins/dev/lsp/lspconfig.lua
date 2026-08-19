@@ -43,9 +43,9 @@ local function on_attach_wrapper(original_on_attach)
 				local current = vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 				vim.lsp.inlay_hint.enable(not current, { bufnr = bufnr })
 			end, "toggle inlay hints")
-			
+
 			-- Enable by default
-			vim.lsp.inlay_hint.enable(true, { bufnr = bufnr }) 
+			-- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 		end
 
 		-- Create a command `:Format` local to the LSP buffer

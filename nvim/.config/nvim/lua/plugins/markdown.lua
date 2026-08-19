@@ -56,9 +56,10 @@ return {
 		end,
 	},
 	{
-		"epwalsh/obsidian.nvim",
+		"obsidian-nvim/obsidian.nvim",
 		version = "*",
 		ft = "markdown",
+		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
@@ -76,8 +77,24 @@ return {
 			return {
 				workspaces = {
 					{
-						name = "brain",
+						name = "notebook",
 						path = vim.fn.expand("~/.notebook"),
+					},
+					{
+						name = "uch",
+						path = vim.fn.expand("~/.notebook/work/uch"),
+					},
+					{
+						name = "begen",
+						path = vim.fn.expand("~/.notebook/work/begen"),
+					},
+					{
+						name = "scienti",
+						path = vim.fn.expand("~/.notebook/work/scienti"),
+					},
+					{
+						name = "personal",
+						path = vim.fn.expand("~/.notebook/personal"),
 					},
 					{
 						name = "project",
@@ -85,6 +102,11 @@ return {
 							return vim.fn.getcwd()
 						end,
 					},
+				},
+				daily_notes = {
+					folder = "personal/journal",
+					date_format = "%Y-%m-%d",
+					template = "journal.md",
 				},
 				preferred_link_style = "markdown",
 				disable_frontmatter = true,
@@ -95,10 +117,52 @@ return {
 					time_format = "%H:%M",
 					substitutions = {
 						title = function()
-							return vim.fn.expand("%:t:r")
+							local name = vim.fn.expand("%:t:r")
+							return name:gsub("^%d%d%d%d%-%d%d%-%d%d%-?", "")
 						end,
 						date = function()
 							return os.date("%Y-%m-%d")
+						end,
+						author = "André Uchôa",
+						["extra.author"] = "André Uchôa",
+						["format-date now \"%Y-%m-%d\""] = function()
+							return os.date("%Y-%m-%d")
+						end,
+						["format-date now"] = function()
+							return os.date("%Y-%m-%d")
+						end,
+						["format-date now \"full\""] = function()
+							return os.date("%A, %B %d, %Y")
+						end,
+
+						["extra.tag"] = function()
+							local path = vim.fn.expand("%:p")
+							if path:find("/work/uch") then
+								return "uch"
+							elseif path:find("/work/begen") then
+								return "begen"
+							elseif path:find("/work/scienti") then
+								return "scienti"
+							else
+								return "personal"
+							end
+						end,
+
+						["extra.tags"] = function()
+							local path = vim.fn.expand("%:p")
+							local tags = { "meeting" }
+
+							if path:find("/work/uch") then
+								table.insert(tags, "uch")
+							elseif path:find("/work/begen") then
+								table.insert(tags, "begen")
+							elseif path:find("/work/scienti") then
+								table.insert(tags, "scienti")
+							else
+								table.insert(tags, "personal")
+							end
+
+							return table.concat(tags, ", ")
 						end,
 					},
 				},

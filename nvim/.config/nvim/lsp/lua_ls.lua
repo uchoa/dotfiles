@@ -7,6 +7,9 @@ return {
 			completion = {
 				callSnippet = "Replace",
 			},
+			hint = {
+				enable = false,
+			},
 		},
 	},
 }
