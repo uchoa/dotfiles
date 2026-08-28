@@ -63,15 +63,16 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
+		-- legacy_commands is deprecated, use move from commands like `ObsidianBacklinks` to `Obsidian backlinks`
+		-- and set `opts.legacy_commands` to false to get rid of this warning.
+		-- see https://github.com/obsidian-nvim/obsidian.nvim/wiki/Commands for details.
+		--      instead.
+		-- Feature will be removed in obsidian.nvim 4.0
 		opts = function()
 			local cwd = vim.fn.getcwd()
-			local templates_folder = vim.fn.expand("~/.notebook/.templates")
+			local templates_folder = ".templates"
 			if vim.fn.isdirectory(cwd .. "/docs/.templates") == 1 then
-				templates_folder = cwd .. "/docs/.templates"
-			else
-				if vim.fn.isdirectory(templates_folder) == 0 then
-					vim.fn.mkdir(templates_folder, "p")
-				end
+				templates_folder = "docs/.templates"
 			end
 
 			return {
@@ -96,21 +97,16 @@ return {
 						name = "personal",
 						path = vim.fn.expand("~/.notebook/personal"),
 					},
-					{
-						name = "project",
-						path = function()
-							return vim.fn.getcwd()
-						end,
-					},
 				},
+				legacy_commands = false,
 				daily_notes = {
 					folder = "personal/journal",
 					date_format = "%Y-%m-%d",
 					template = "journal.md",
 				},
-				preferred_link_style = "markdown",
-				disable_frontmatter = true,
-				ui = { enable = false },
+				link = { style = "markdown" },
+				frontmatter = { enabled = true },
+				ui = { enable = true },
 				templates = {
 					folder = templates_folder,
 					date_format = "%Y-%m-%d",
@@ -125,13 +121,13 @@ return {
 						end,
 						author = "André Uchôa",
 						["extra.author"] = "André Uchôa",
-						["format-date now \"%Y-%m-%d\""] = function()
+						['format-date now "%Y-%m-%d"'] = function()
 							return os.date("%Y-%m-%d")
 						end,
 						["format-date now"] = function()
 							return os.date("%Y-%m-%d")
 						end,
-						["format-date now \"full\""] = function()
+						['format-date now "full"'] = function()
 							return os.date("%A, %B %d, %Y")
 						end,
 
