@@ -63,17 +63,12 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 		},
-		-- legacy_commands is deprecated, use move from commands like `ObsidianBacklinks` to `Obsidian backlinks`
-		-- and set `opts.legacy_commands` to false to get rid of this warning.
-		-- see https://github.com/obsidian-nvim/obsidian.nvim/wiki/Commands for details.
-		--      instead.
-		-- Feature will be removed in obsidian.nvim 4.0
 		opts = function()
 			local cwd = vim.fn.getcwd()
 			local templates_folder = ".templates"
-			if vim.fn.isdirectory(cwd .. "/docs/.templates") == 1 then
-				templates_folder = "docs/.templates"
-			end
+			-- if vim.fn.isdirectory(cwd .. "/docs/.templates") == 1 then
+			-- 	templates_folder = "docs/.templates"
+			-- end
 
 			return {
 				workspaces = {
@@ -83,24 +78,20 @@ return {
 					},
 					{
 						name = "uch",
-						path = vim.fn.expand("~/.notebook/work/uch"),
-					},
-					{
-						name = "begen",
-						path = vim.fn.expand("~/.notebook/work/begen"),
+						path = vim.fn.expand("~/.notebook/organizations/uch"),
 					},
 					{
 						name = "scienti",
-						path = vim.fn.expand("~/.notebook/work/scienti"),
+						path = vim.fn.expand("~/.notebook/organizations/scienti"),
 					},
 					{
-						name = "personal",
-						path = vim.fn.expand("~/.notebook/personal"),
+						name = "begen",
+						path = vim.fn.expand("~/.notebook/organizations/begen"),
 					},
 				},
 				legacy_commands = false,
 				daily_notes = {
-					folder = "personal/journal",
+					folder = "journal",
 					date_format = "%Y-%m-%d",
 					template = "journal.md",
 				},
@@ -133,11 +124,11 @@ return {
 
 						["extra.tag"] = function()
 							local path = vim.fn.expand("%:p")
-							if path:find("/work/uch") then
+							if path:find("/organizations/uch") then
 								return "uch"
-							elseif path:find("/work/begen") then
+							elseif path:find("/organizations/begen") then
 								return "begen"
-							elseif path:find("/work/scienti") then
+							elseif path:find("/organizations/scienti") then
 								return "scienti"
 							else
 								return "personal"
@@ -148,11 +139,11 @@ return {
 							local path = vim.fn.expand("%:p")
 							local tags = { "meeting" }
 
-							if path:find("/work/uch") then
+							if path:find("/organizations/uch") then
 								table.insert(tags, "uch")
-							elseif path:find("/work/begen") then
+							elseif path:find("/organizations/begen") then
 								table.insert(tags, "begen")
-							elseif path:find("/work/scienti") then
+							elseif path:find("/organizations/scienti") then
 								table.insert(tags, "scienti")
 							else
 								table.insert(tags, "personal")
