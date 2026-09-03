@@ -28,6 +28,9 @@ export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 export OLLAMA_VULKAN=1
 export OLLAMA_IGPU_ENABLE=1
+export OLLAMA_NUM_PARALLEL=2
+export OLLAMA_MAX_LOADED_MODELS=1
+export OLLAMA_FLASH_ATTENTION=1
 export GGML_VK_VISIBLE_DEVICES=0
 
 export XBPS_DISTDIR=$HOME/projects/void-linux/void-packages/

@@ -25,3 +25,10 @@ adjust-cursor-thickness = 2
 cursor-color = DarkOrange3
 cursor-style-blink = true
 confirm-close-surface = false
+
+# keybindings 
+keybind = ctrl+b>-=new_split:down
+keybind = ctrl+b>shift+backslash=new_split:right
+keybind = ctrl+b>c=new_tab
+
+# keybind = ctrl+b>comma=prompt_tab_title
