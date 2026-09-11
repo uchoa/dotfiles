@@ -1,9 +1,5 @@
 return {
-	settings = {
-		tinymist = {
-			formatterMode = "typstyle",
-			exportPdf = "onType",
-			semanticTokens = "disable",
-		},
-	},
+  cmd = { "tinymist" },
+  filetypes = { "typst" },
+  root_markers = { "typst.toml", ".git" },
 }

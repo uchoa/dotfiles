@@ -1,7 +1,5 @@
 return {
-	settings = {
-		ts_ls = {
-			filetypes = { "typescript", "javascript" },
-		},
-	},
+  cmd = { "bunx", "--no-install", "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".git" },
 }
