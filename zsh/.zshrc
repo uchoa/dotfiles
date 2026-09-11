@@ -26,57 +26,54 @@ alias less='less -rF'
 eval "$(starship init zsh)"
 
 # herdr
-hsch() {
-    local session
-
-		session=$(herdr session list | awk 'NR>1 {print $1}' | fzf --border --header="Switch Herdr Session")
-
-		zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    
-    herdr session attach "$session"
-
-}
-
-zle -N hsch_widget hsch
-
-# 3. Bind the widget to a key shortcut (e.g., Ctrl + G)
-bindkey '\eh' hsch_widget
+# hsch() {
+#     local session
+#
+# 		session=$(herdr session list | awk 'NR>1 {print $1}' | fzf --border --header="Switch Herdr Session")
+#
+# 		zle reset-prompt > /dev/null 2>&1 || true
+#     [[ -z "$session" ]] && return
+#
+#     herdr session attach "$session"
+#
+# }
+#
+# zle -N hsch_widget hsch
+#
+# # 3. Bind the widget to a key shortcut (e.g., Ctrl + G)
+# bindkey '\eh' hsch_widget
 
 # sesh
-function sesh-sessions() {
-  {
-    exec </dev/tty
-    exec <&1
-    local session
-    # session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ' --preview 'sesh preview {}')
-    # session=$(sesh list -t -c | tv --preview-command "script -q -c 'sesh preview {}' /dev/null")
-    # session=$(sesh list -t -c | tv --preview-command "unbuffer sesh preview {}")
-
-		session=$(sesh list --icons | fzf --height 40% \
-			--no-sort --ansi --border-label ' sesh ' --border --prompt '⚡  ' \
-			--header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
-			--bind 'tab:down,btab:up' \
-			--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
-			--bind 'ctrl-t:change-prompt(  )+reload(sesh list -t --icons)' \
-			--bind 'ctrl-g:change-prompt(󰢻  )+reload(sesh list -c --icons)' \
-			--bind 'ctrl-x:change-prompt(  )+reload(sesh list -z --icons)' \
-			--bind 'ctrl-f:change-prompt(  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-			--bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
-			--preview-window 'right:55%' \
-			--preview 'sesh preview {}'
-		)
-
-    zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect $session
-  }
-}
-
-zle     -N             sesh-sessions
-bindkey -M emacs '\es' sesh-sessions
-bindkey -M vicmd '\es' sesh-sessions
-bindkey -M viins '\es' sesh-sessions
+# function sesh-sessions() {
+#   {
+#     exec </dev/tty
+#     exec <&1
+#     local session
+#
+# 		session=$(sesh list --icons | fzf --height 40% \
+# 			--no-sort --ansi --border-label ' sesh ' --border --prompt '⚡  ' \
+# 			--header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
+# 			--bind 'tab:down,btab:up' \
+# 			--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
+# 			--bind 'ctrl-t:change-prompt(  )+reload(sesh list -t --icons)' \
+# 			--bind 'ctrl-g:change-prompt(󰢻  )+reload(sesh list -c --icons)' \
+# 			--bind 'ctrl-x:change-prompt(  )+reload(sesh list -z --icons)' \
+# 			--bind 'ctrl-f:change-prompt(  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+# 			--bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
+# 			--preview-window 'right:55%' \
+# 			--preview 'sesh preview {}'
+# 		)
+#
+#     zle reset-prompt > /dev/null 2>&1 || true
+#     [[ -z "$session" ]] && return
+#     sesh connect $session
+#   }
+# }
+#
+# zle     -N             sesh-sessions
+# bindkey -M emacs '\es' sesh-sessions
+# bindkey -M vicmd '\es' sesh-sessions
+# bindkey -M viins '\es' sesh-sessions
 
 # Activate syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -107,7 +104,7 @@ eval "$(zoxide init zsh)"
 eval "$(herdr completion zsh)"
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+# if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
 
 # bun completions
 [ -s "/home/uchoa/.bun/_bun" ] && source "/home/uchoa/.bun/_bun"
@@ -121,3 +118,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="/home/uchoa/.local/bin:$PATH"
 
 eval "$(omp completions zsh)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/uchoa/temp/google-cloud-sdk/path.zsh.inc' ]; then . '/home/uchoa/temp/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/uchoa/.local/share/google-cloud-sdk/completion.zsh.inc'; fi

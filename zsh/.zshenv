@@ -7,6 +7,14 @@ export GPG_TTY=$(tty)
 # Ensure gpg-agent is running
 gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 
+# # ONLY set and update the TTY if a real terminal device exists
+# # This preserves the active agent state for background subprocesses
+# CURRENT_TTY=$(tty 2>/dev/null)
+# if [ "$CURRENT_TTY" != "not a tty" ] && [ -n "$CURRENT_TTY" ]; then
+#     export GPG_TTY="$CURRENT_TTY"
+#     gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
+# fi
+
 export XCURSOR_THEME="phinger-cursors-dark"
 export BAT_PAGER="less -rF"
 
@@ -59,5 +67,5 @@ if [ -f '/home/uchoa/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/hom
 alias ai-mode='echo performance | sudo tee /sys/firmware/acpi/platform_profile && echo "🚀 AI Performance Mode: ENGAGED"'
 alias battery-mode='echo low-power | sudo tee /sys/firmware/acpi/platform_profile && echo "🔋 Battery Saver Mode: ENGAGED"'
 alias normal-mode='echo balanced | sudo tee /sys/firmware/acpi/platform_profile && echo "⚖️  Balanced Mode: ENGAGED"'
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 export LANGUAGE="en_US.UTF-8"
