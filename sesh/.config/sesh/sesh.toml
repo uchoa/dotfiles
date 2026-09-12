@@ -15,9 +15,9 @@ name = "home"
 path = "~"
 
 [[session]]
-name = "void update"
+name = "OS Update"
 path = "~"
-startup_command = "sudo xbps-install -Syu"
+startup_command = "sudo paru -Syu"
 
 [[session]]
 name = "config|tmux"
