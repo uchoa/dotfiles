@@ -76,7 +76,6 @@ return {
     map("n", "<leader>,", function() Snacks.picker.buffers() end, "Buffers")
     map("n", "<leader>/", function() Snacks.picker.grep() end, "Grep")
     map("n", "<leader>:", function() Snacks.picker.command_history({ layout = "ivy" }) end, "Command History")
-    map("n", "<leader>n", function() Snacks.picker.notifications() end, "Notification History")
     map("n", "<leader>e", function() Snacks.explorer() end, "File Explorer")
 
     -- Find (<leader>f...)
