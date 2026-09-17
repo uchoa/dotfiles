@@ -18,6 +18,7 @@ gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 export XCURSOR_THEME="phinger-cursors-dark"
 export BAT_PAGER="less -rF"
 
+alias twtui='taskwarrior-tui'
 alias shutdown='sudo shutdown -h now'
 alias reboot='sudo reboot'
 alias her='herdr'
