@@ -135,3 +135,5 @@ fi
 
 # Added by the Hunk installer (https://hunk.dev)
 export PATH='/home/uchoa/.hunk/bin':"$PATH"
+
+source /home/uchoa/.config/broot/launcher/bash/br

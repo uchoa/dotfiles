@@ -17,7 +17,7 @@ path = "~"
 [[session]]
 name = "OS Update"
 path = "~"
-startup_command = "sudo paru -Syu"
+startup_command = "paru -Syu"
 
 [[session]]
 name = "config|tmux"

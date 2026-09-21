@@ -46,6 +46,8 @@ export XBPS_DISTDIR=$HOME/projects/void-linux/void-packages/
 
 export GOPRIVATE=github.com/begen-ai,github.com/scienti-io,github.com/uchoa,gitlab.com/scienti,gitlab.com/auchoa
 
+export LESSHISTFILE=-
+
 # Ensure PATH entries are unique
 typeset -U path PATH
 

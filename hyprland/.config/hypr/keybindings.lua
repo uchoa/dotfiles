@@ -104,6 +104,10 @@ function M.set(programs)
 	hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 	hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 	hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+	-- Noctalia Screenshot Binds
+	hl.bind("Print", hl.dsp.exec_cmd("noctalia msg screenshot-fullscreen"))
+	hl.bind("XF86SelectiveScreenshot", hl.dsp.exec_cmd("noctalia msg screenshot-region"))
 end
 
 return M

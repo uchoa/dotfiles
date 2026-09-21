@@ -111,8 +111,7 @@ runtime ordering hazards.
 │   │       ├── bullets.lua            # bullets-vim/bullets.nvim (Lua list automation)
 │   │       ├── render-markdown.lua    # In-buffer markdown styling & icon glyphs
 │   │       ├── yamlmatter.lua         # Frontmatter icon rendering
-│   │       ├── table-tidy.lua         # Markdown table formatting
-│   │       └── preview.lua            # markdown-preview.nvim + terminal-browser split
+│   │       └── table-tidy.lua         # Markdown table formatting
 │   │
 │   └── lsp/                           # Native 0.12 server definitions (cmd, filetypes, roots)
 │       ├── lua_ls.lua                 # Lua language server configuration
@@ -357,16 +356,6 @@ runtime ordering hazards.
    - **Trigger**: `cmd = "TableTidyAll"`
    - **Details**: Formats and cleans markdown tables, aligning pipe columns
      cleanly.
-5. **`preview.lua`**:
-   - **Repository**: `iamcco/markdown-preview.nvim`
-   - **Trigger**: `cmd = { "MarkdownPreviewToggle", "MarkdownPreview" }`,
-     `ft = "markdown"`
-   - **Build**: `cd app && bun install`
-   - **Details**: Bound to `<C-p>`. Configures
-     `vim.g.mkdp_browserfunc = "v:lua.OpenInSplit"` to spawn `terminal-browser`
-     inside a native vertical split
-     (`:vsplit | terminal terminal-browser <url>`), providing in-terminal live
-     markdown previews.
 
 ---
 
@@ -449,11 +438,11 @@ following external binaries, toolchains, language servers, and formatters.
 
 ### 7.2 Language Runtimes & Package Managers
 
-| Runtime                               | Purpose in this Configuration                                                                                                                                                                                                 |
-| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Rust Toolchain** (`cargo`, `rustc`) | • Compiling native Rust fuzzy matcher for `blink.cmp` (`cargo build --release`).<br>• Compiling projects for debugging via LLDB.<br>• Managing `rust-analyzer` and `rustfmt`.                                                 |
-| **Go** (`go`)                         | Go development, test running via `neotest`, and managing `gopls` / `dlv`.                                                                                                                                                     |
-| **Bun** (`bun`)                       | • Complete replacement for Node.js & npm.<br>• Installs and runs global CLI tools (`bun install -g typescript-language-server prettier`).<br>• Post-install build step for `markdown-preview.nvim` (`cd app && bun install`). |
+| Runtime                               | Purpose in this Configuration                                                                                                                                                 |
+| :------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Rust Toolchain** (`cargo`, `rustc`) | • Compiling native Rust fuzzy matcher for `blink.cmp` (`cargo build --release`).<br>• Compiling projects for debugging via LLDB.<br>• Managing `rust-analyzer` and `rustfmt`. |
+| **Go** (`go`)                         | Go development, test running via `neotest`, and managing `gopls` / `dlv`.                                                                                                     |
+| **Bun** (`bun`)                       | • Complete replacement for Node.js & npm.<br>• Installs and runs global CLI tools (`bun install -g typescript-language-server prettier`).                                     |
 
 ### 7.3 Language Server Protocol (LSP) Daemons
 
@@ -489,9 +478,3 @@ Declared in `lua/plugins/coding/debug/`:
 | :---------------- | :----------- | :---------------- | :---------------------------------------------------- |
 | **`lldb-dap`**    | `dap.lua`    | Rust, Zig, C, C++ | Part of system LLVM / Clang / LLDB packages           |
 | **`dlv`** (Delve) | `dap-go.lua` | Go                | `go install github.com/go-delve/delve/cmd/dlv@latest` |
-
-### 7.6 Specialized Viewers
-
-| Tool Binary            | Config File                     | Purpose                         | Notes                                                                                                                            |
-| :--------------------- | :------------------------------ | :------------------------------ | :------------------------------------------------------------------------------------------------------------------------------- |
-| **`terminal-browser`** | `lua/plugins/notes/preview.lua` | In-editor Markdown HTML preview | Runs inside a vertical Neovim split via `markdown-preview.nvim`. Available on AUR (`terminal-browser-bin`) or upstream releases. |

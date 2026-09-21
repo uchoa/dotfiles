@@ -6,90 +6,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-_G.leaf_preview_instances = _G.leaf_preview_instances or {}
-
-function _G.StopMarkdownPreview(bufnr)
-	bufnr = bufnr or vim.api.nvim_get_current_buf()
-	local info = _G.leaf_preview_instances[bufnr]
-	if not info then
-		return
-	end
-	_G.leaf_preview_instances[bufnr] = nil
-
-	if info.augroup then
-		pcall(vim.api.nvim_del_augroup_by_id, info.augroup)
-	end
-
-	if info.win_id and vim.api.nvim_win_is_valid(info.win_id) then
-		pcall(vim.api.nvim_win_close, info.win_id, true)
-	end
-
-	if info.job_id then
-		pcall(vim.fn.jobstop, info.job_id)
-	end
-
-	if info.term_bufnr and vim.api.nvim_buf_is_valid(info.term_bufnr) then
-		pcall(vim.api.nvim_buf_delete, info.term_bufnr, { force = true })
-	end
-end
-
-function _G.ToggleMarkdownPreview()
-	local bufnr = vim.api.nvim_get_current_buf()
-	if _G.leaf_preview_instances[bufnr] then
-		local info = _G.leaf_preview_instances[bufnr]
-		local win_valid = info.win_id and vim.api.nvim_win_is_valid(info.win_id)
-		_G.StopMarkdownPreview(bufnr)
-		if win_valid then
-			return
-		end
-	end
-
-	local file_path = vim.api.nvim_buf_get_name(bufnr)
-	if file_path == "" then
-		vim.notify("Leaf Preview: Buffer has no associated file", vim.log.levels.WARN)
-		return
-	end
-
-	vim.cmd("rightbelow vsplit")
-	vim.cmd("enew")
-
-	local term_win = vim.api.nvim_get_current_win()
-	local term_buf = vim.api.nvim_get_current_buf()
-
-	vim.bo[term_buf].buflisted = false
-
-	local job_id = vim.fn.termopen("leaf -w " .. vim.fn.shellescape(file_path), {
-		on_exit = function()
-			vim.schedule(function()
-				_G.StopMarkdownPreview(bufnr)
-			end)
-		end,
-	})
-
-	vim.cmd("wincmd p")
-
-	local augroup = vim.api.nvim_create_augroup("LeafPreview_" .. bufnr, { clear = true })
-	vim.api.nvim_create_autocmd({ "BufDelete", "BufWipeout", "BufUnload" }, {
-		group = augroup,
-		buffer = bufnr,
-		once = true,
-		callback = function()
-			_G.StopMarkdownPreview(bufnr)
-		end,
-	})
-
-	_G.leaf_preview_instances[bufnr] = {
-		win_id = term_win,
-		term_bufnr = term_buf,
-		job_id = job_id,
-		augroup = augroup,
-	}
-end
-
-vim.keymap.set("n", "<C-p>", function()
-	_G.ToggleMarkdownPreview()
-end, { buffer = true, desc = "Toggle Markdown Preview (leaf)" })
-
 _G.mdv_preview_instances = _G.mdv_preview_instances or {}
 
 function _G.StopMdvPreview(bufnr)
@@ -202,6 +118,6 @@ function _G.ToggleMdvPreview()
 	}
 end
 
-vim.keymap.set("n", "<C-M>", function()
+vim.keymap.set("n", "<C-p>", function()
 	_G.ToggleMdvPreview()
-end, { buffer = true, desc = "Toggle Markdown Preview (mdv GUI)" })
+end, { buffer = true, desc = "Toggle Markdown Preview (mdv)" })
