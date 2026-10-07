@@ -14,12 +14,7 @@ behavior = "own"
 
 # Define conditional overrides based on the project path
 [[--scope]]
---when.repositories = [
-  "/home/uchoa/github/scienti",
-  "/home/uchoa/projects/scienti",
-  "/home/uchoa/projects/ScientiOS",
-  "/home/uchoa/projects/sciOS"
-]
+--when.repositories = ["/home/uchoa/github/scienti", "/home/uchoa/projects/scienti", "/home/uchoa/projects/ScientiOS", "/home/uchoa/projects/sciOS"]
 
 [--scope.user]
 email = "uchoa@scienti.com.br"
@@ -38,3 +33,9 @@ key = "41D2510855ECA55A266BA35DDB93C0ECE6FE64A4"
 
 [ui]
 default-command = "log"
+
+[aliases]
+push = ["git", "push", "-c", "@"]
+
+[git]
+colocate = false

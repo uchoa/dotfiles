@@ -25,5 +25,7 @@ include dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
 
+uda.taskwarrior-tui.tasklist.vertical = true
+
 context.inbox.read="+INBOX"
 context.inbox.write="+INBOX"

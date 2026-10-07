@@ -258,6 +258,16 @@ hl.device({
 	sensitivity = -0.5,
 })
 
+hl.device({
+	name = "tpps/2-elan-trackpoint",
+	sensitivity = -0.5,
+})
+
+hl.device({
+	name = "elan0678:00-04f3:3195-touchpad",
+	sensitivity = 0.5,
+})
+
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
