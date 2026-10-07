@@ -412,7 +412,6 @@ The following components from the previous configuration
 | **`octo.nvim`**                      | Dropped to remove `telescope.nvim` and `plenary.nvim` dependencies.                                       |
 | **`christoomey/vim-tmux-navigator`** | Dropped; migrating to `herdr`.                                                                            |
 | **`opencode.nvim` & `omp.nvim`**     | Removed from active editor startup.                                                                       |
-| **`obsidian.nvim` & `zk.lua`**       | Dropped; migrating knowledge management to `nvim-orgmode` & `org-roam.nvim`.                              |
 | **`hyprls.lua`**                     | Obsolete; Hyprland configuration migrated to Lua.                                                         |
 | **`windwp/nvim-autopairs`**          | Replaced by minimal `echasnovski/mini.pairs`.                                                             |
 | **`surf` browser**                   | Replaced by `terminal-browser-bin` running in an internal Neovim split via `mkdp_browserfunc`.            |
