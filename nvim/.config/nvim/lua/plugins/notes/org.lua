@@ -3,8 +3,8 @@ return {
 	config = function()
 		require("org").setup({
 			org_directory = "~/.notebook",
-			agenda_files = { "~/.notebook/**/*.org", "~/projects/**/*.org" },
-			default_notes_file = "~/.notebook/refile.org",
+			agenda_files = { "~/.notebook/**/*.org" },
+			default_notes_file = "~/.notebook/inbox.org",
 			ui = {
 				bullets = { "◉", "○", "✸", "✿" }, -- or false
 				checkboxes = { " ", "◐", "✓" }, -- or false

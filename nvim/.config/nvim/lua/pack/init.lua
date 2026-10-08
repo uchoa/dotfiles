@@ -61,20 +61,44 @@ local function setup_lazy(name, spec)
     end
   end
 end
+local all_specs = {}
+
+local function run_build(name, spec)
+  if not (spec and spec.build) then
+    return
+  end
+  pcall(vim.cmd, "packadd " .. name)
+  if type(spec.build) == "function" then
+    local ok, err = pcall(spec.build)
+    if not ok then
+      vim.notify("Build failed for " .. name .. ": " .. tostring(err), vim.log.levels.ERROR)
+    else
+      vim.notify("Build succeeded for " .. name, vim.log.levels.INFO)
+    end
+  elseif type(spec.build) == "string" then
+    local out = vim.fn.system(spec.build)
+    if vim.v.shell_error ~= 0 then
+      vim.notify("Build failed for " .. name .. ": " .. out, vim.log.levels.ERROR)
+    else
+      vim.notify("Build succeeded for " .. name, vim.log.levels.INFO)
+    end
+  end
+end
 
 local function load_all()
   local plugin_files = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/plugins", "**/*.lua", false, true)
-  
+
   local startup_specs = {}
   local lazy_specs = {}
-  
+
   for _, file in ipairs(plugin_files) do
     local modname = file:match("lua/(.*)%.lua$"):gsub("/", ".")
     local ok, spec = pcall(require, modname)
     if ok and type(spec) == "table" then
       if spec.src then
         spec.name = spec.name or spec.src:match("([^/]+)$"):gsub("%.git$", "")
-        
+        all_specs[spec.name] = spec
+
         local is_lazy = spec.event or spec.ft or spec.cmd or spec.keys
         if is_lazy then
           table.insert(lazy_specs, spec)
@@ -86,7 +110,6 @@ local function load_all()
         pcall(spec.config)
       end
     end
-  
   end
   if vim.pack and vim.pack.add then
     if #startup_specs > 0 then
@@ -97,7 +120,7 @@ local function load_all()
         end
       end
     end
-    
+
     if #lazy_specs > 0 then
       vim.pack.add(lazy_specs, { confirm = false, load = false })
       for _, spec in ipairs(lazy_specs) do
@@ -121,45 +144,76 @@ vim.api.nvim_create_autocmd("User", {
   callback = function(args)
     local data = args.data
     if data and (data.kind == "install" or data.kind == "update") then
-      local name = data.plugin_name or data.name
-      local ok, spec = pcall(require, "plugins." .. name)
-      if not ok then
-        -- try to find it by iterating all specs if needed, but for now we assume it matches the file name
-        local plugin_files = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/plugins", "**/*.lua", false, true)
-        for _, file in ipairs(plugin_files) do
-          local modname = file:match("lua/(.*)%.lua$"):gsub("/", ".")
-          local o, s = pcall(require, modname)
-          if o and s and type(s) == "table" and s.name == name and s.build then
-            spec = s
-            break
-          end
-        end
-      end
-      if spec and type(spec) == "table" and spec.build then
-        if type(spec.build) == "function" then
-          spec.build()
-        elseif type(spec.build) == "string" then
-          vim.fn.system(spec.build)
-        end
+      local name = data.spec and data.spec.name or data.plugin_name or data.name
+      local spec = name and all_specs[name]
+      if spec and spec.build then
+        run_build(name, spec)
       end
     end
   end,
 })
 
-vim.api.nvim_create_user_command("PackUpdate", function()
-  if vim.pack and vim.pack.update then
-    vim.pack.update()
+vim.api.nvim_create_user_command("PackBuild", function(opts)
+  local target = opts.args ~= "" and opts.args or nil
+  if target then
+    local spec = all_specs[target]
+    if spec and spec.build then
+      run_build(target, spec)
+    else
+      vim.notify("No build hook defined for " .. target, vim.log.levels.WARN)
+    end
   else
-    print("vim.pack.update not available")
+    local built_any = false
+    for name, spec in pairs(all_specs) do
+      if spec.build then
+        built_any = true
+        run_build(name, spec)
+      end
+    end
+    if not built_any then
+      vim.notify("No build hooks found across plugins", vim.log.levels.INFO)
+    end
   end
-end, {})
+end, {
+  nargs = "?",
+  complete = function(arg_lead)
+    local matches = {}
+    for name, spec in pairs(all_specs) do
+      if spec.build and name:find("^" .. vim.pesc(arg_lead)) then
+        table.insert(matches, name)
+      end
+    end
+    return matches
+  end,
+})
+
+vim.api.nvim_create_user_command("PackUpdate", function(opts)
+  if vim.pack and vim.pack.update then
+    local names = #opts.fargs > 0 and opts.fargs or nil
+    vim.pack.update(names)
+  else
+    vim.notify("vim.pack.update not available", vim.log.levels.ERROR)
+  end
+end, {
+  nargs = "*",
+  complete = function(arg_lead)
+    local pkgs = vim.pack and vim.pack.get and vim.pack.get() or {}
+    local names = {}
+    for _, pkg in ipairs(pkgs) do
+      if pkg.spec and pkg.spec.name and pkg.spec.name:find("^" .. vim.pesc(arg_lead)) then
+        table.insert(names, pkg.spec.name)
+      end
+    end
+    return names
+  end,
+})
 
 vim.api.nvim_create_user_command("PackStatus", function()
   if vim.pack and vim.pack.get then
     local pkgs = vim.pack.get()
     print(vim.inspect(pkgs))
   else
-    print("vim.pack.get not available")
+    vim.notify("vim.pack.get not available", vim.log.levels.ERROR)
   end
 end, {})
 
