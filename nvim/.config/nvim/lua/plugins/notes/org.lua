@@ -26,6 +26,13 @@ return {
 						{ auto_category = true, order = 9 },
 					},
 				},
+				kanban = {
+					columns = {
+						"TODO",
+						{ "NEXT", "WAITING", name = "DOING", wip = 3 },
+						"DONE",
+					},
+				},
 				review = {},
 				heatmap = { weeks = 52 },
 				sidebar = { position = "right" },
