@@ -35,18 +35,44 @@ alias less='less -rF'
 eval "$(starship init zsh)"
 
 # Completion module and init
+typeset -g ZSH_COMPCACHE="$HOME/.zfunc"
+[[ -d "$ZSH_COMPCACHE" ]] || mkdir -p "$ZSH_COMPCACHE"
+fpath=("$ZSH_COMPCACHE" $fpath)
+
+refresh_comp_async() {
+  local cmd="$1" file="$ZSH_COMPCACHE/_$1" bin
+  bin=$(command -v "$cmd" 2>/dev/null) || return
+  bin=${bin:A}
+  if [[ ! -f "$file" || "$bin" -nt "$file" ]]; then
+    touch "$file"
+    (
+      local tmp="${file}.tmp.$$"
+      case "$cmd" in
+        omp)   omp completions zsh >| "$tmp" ;;
+        jj)    jj util completion zsh >| "$tmp" ;;
+        herdr) herdr completion zsh >| "$tmp" ;;
+      esac 2>/dev/null
+      if [[ -s "$tmp" ]]; then
+        mv -f "$tmp" "$file"
+      else
+        rm -f "$tmp"
+      fi
+    ) </dev/null &>/dev/null &!
+  fi
+}
+
+refresh_comp_async omp
+refresh_comp_async jj
+refresh_comp_async herdr
+
 zmodload zsh/complist
 autoload -Uz compinit
-compinit
+compinit -C
 
 zstyle ':completion:*' menu select
 
 # Tool completions
-command -v jj >/dev/null 2>&1 && source <(jj util completion zsh)
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
-command -v herdr >/dev/null 2>&1 && eval "$(herdr completion zsh)"
-command -v omp >/dev/null 2>&1 && eval "$(omp completions zsh)"
-
 # Bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
