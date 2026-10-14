@@ -55,8 +55,8 @@ function M.set(programs)
 	-- Notes Mode Submap
 	hl.bind(mainMod .. " + SHIFT + N", hl.dsp.submap("notes"))
 	hl.define_submap("notes", function()
-		local captureCmd = [[ghostty --class=note.taking -e nvim -c "lua vim.schedule(require('org-roam').api.capture_node)"]]
-		local findCmd = [[ghostty --class=note.taking -e nvim -c "lua vim.schedule(require('org-roam').api.find_node)"]]
+		local captureCmd = [[ghostty --class=note.taking -e nvim -c "lua vim.schedule(function() require('org').action('roam_capture') end)"]]
+		local findCmd = [[ghostty --class=note.taking -e nvim -c "lua vim.schedule(function() require('org').action('roam_node_find') end)"]]
 
 		local function run_and_reset(cmd)
 			return function()

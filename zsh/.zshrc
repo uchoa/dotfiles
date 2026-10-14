@@ -129,6 +129,50 @@ bindkey -M emacs '\es' sesh-sessions
 bindkey -M vicmd '\es' sesh-sessions
 bindkey -M viins '\es' sesh-sessions
 
+# Tuios session switcher
+function tuios-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session raw name list_cmd
+    list_cmd='(tuios ls --json 2>/dev/null | jq -r ".[].name" 2>/dev/null | sed "s/^/⭐  /"; command -v zoxide >/dev/null 2>&1 && zoxide query -l | sed "s/^/📁  /")'
+    session=$(eval "$list_cmd" | fzf --height 40% \
+      --no-sort --ansi --border-label ' tuios ' --border --prompt '⚡  ' \
+      --header '  ^d tuios kill-session' \
+      --bind 'tab:down,btab:up' \
+      --bind "ctrl-d:execute(item=\"{}\"; case \"\$item\" in *⭐*) raw=\$(printf '%s' \"\$item\" | sed -E \"s/^'?(⭐|📁)[[:space:]]+//; s/[[:space:]]+'?\$//; s/^'//; s/'\$//\"); tuios kill-session \"\$raw\" ;; esac)+change-prompt(⚡  )+reload($list_cmd)" \
+      --preview-window 'right:55%' \
+      --preview '
+        item="{}"
+        raw=$(printf "%s" "$item" | sed -E "s/^'\''?(⭐|📁)[[:space:]]+//; s/[[:space:]]+'\''?$//; s/^'\''//; s/'\''$//")
+        case "$item" in
+          *⭐*) tuios capture-pane -s "$raw" --ansi ;;
+          *📁*) if command -v eza >/dev/null 2>&1; then eza --tree --follow-symlinks --level=2 --all --git --icons --color=always "$raw"; else ls -lsa --color=always "$raw"; fi ;;
+        esac
+      '
+    )
+
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+
+    raw=$(printf '%s' "$session" | sed -E 's/^(⭐|📁)[[:space:]]+//; s/[[:space:]]+$//')
+    case "$session" in
+      ⭐*)
+        tuios attach "$raw"
+        ;;
+      📁*)
+        name=$(basename "$raw")
+        tuios new "$name" --cwd "$raw"
+        ;;
+    esac
+    zle reset-prompt > /dev/null 2>&1 || true
+  }
+}
+zle     -N             tuios-sessions
+bindkey -M emacs '^t' tuios-sessions
+bindkey -M vicmd '^t' tuios-sessions
+bindkey -M viins '^t' tuios-sessions
+
 # Autosuggestions
 if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
