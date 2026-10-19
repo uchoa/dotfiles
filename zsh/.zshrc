@@ -32,7 +32,20 @@ alias md='glow --tui'
 alias docker='podman'
 alias less='less -rF'
 
+# Silence Zsh PROMPT_SP end-of-line marker (prevents stray '%' on window creation/PTY resize races in multiplexers like tuios)
+export PROMPT_EOL_MARK=""
+
 eval "$(starship init zsh)"
+
+# Reset Kitty keyboard protocol before each prompt (prevents CSI-u /5u leaks when TUIs like tuios exit/detach)
+autoload -Uz add-zsh-hook
+_term_keyboard_reset() {
+  printf '\e[<u\e[=0u'
+  while read -s -t 0 -k 1 2>/dev/null; do
+    read -s -t 0.01 -k 1 >/dev/null 2>&1
+  done
+}
+add-zsh-hook precmd _term_keyboard_reset
 
 # Completion module and init
 typeset -g ZSH_COMPCACHE="$HOME/.zfunc"
@@ -165,6 +178,7 @@ function tuios-sessions() {
         tuios new "$name" --cwd "$raw"
         ;;
     esac
+    _term_keyboard_reset
     zle reset-prompt > /dev/null 2>&1 || true
   }
 }
